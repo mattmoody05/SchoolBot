@@ -13,5 +13,6 @@ Theme : For Students
 8. Music system (maybe :/ I know lavalink tho)
 9. Basic kick ban commands
 10. Add synonym and other dictionary related tasks
+11. Homework tracking system (would require db work)
 
 It would be nice if you add some stuff here :)
