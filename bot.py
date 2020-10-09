@@ -26,7 +26,7 @@ client.remove_command("help")
 async def on_ready():
     ListeningTo = discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help")
     await client.change_presence(status=discord.Status.online, activity=ListeningTo)
-    print('We have logged in as {0.user}'.format(client))
+    print('Logged in as {0.user}'.format(client))
 
 
 # automatically loading all cogs when started
@@ -44,12 +44,10 @@ async def reload(ctx):
         if filename.endswith(".py"):
             client.unload_extension(f'cogs.{filename[:-3]}')
             await ctx.send("Unloaded cog: {0}".format(filename))
-            time.sleep(1)
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             client.load_extension(f'cogs.{filename[:-3]}')
             await ctx.send("Loaded cog: {0}".format(filename))
-            time.sleep(1)
 
 
 client.run(BOTTOKEN)

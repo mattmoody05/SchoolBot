@@ -1,8 +1,11 @@
 Theme : For Students
 
 1. Maths commands
+    - quadratic solver?
 2. Wikipedia and their API
 3. Meaning of any word
+    - currently working on this 09/10/20
+    - basic funtionality, needs to be formatted better
 4. Translate to any language
 5. Time table management using DB
 6. Timer (maybe with DB)
