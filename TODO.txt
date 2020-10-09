@@ -12,6 +12,6 @@ Theme : For Students
 7. Youtube search
 8. Music system (maybe :/ I know lavalink tho)
 9. Basic kick ban commands
-
+10. Add synonym and other dictionary related tasks
 
 It would be nice if you add some stuff here :)
