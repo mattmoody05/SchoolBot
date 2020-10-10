@@ -37,6 +37,7 @@ for filename in os.listdir("./cogs"):
 
 
 # command to reload cogs if not working properly
+@commands.has_guild_permissions(administrator=True)
 @client.command()
 async def reload(ctx):
     await ctx.send("***Reloading cogs...***")

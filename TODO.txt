@@ -3,6 +3,7 @@ Theme : For Students
 1. Maths commands
     - quadratic solver?
 2. Wikipedia and their API
+    - currently working on this 10/10/20
 3. Meaning or synonyms of any word
     - currently working on this 09/10/20
     - basic funtionality, needs to be formatted better

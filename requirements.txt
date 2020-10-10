@@ -1,2 +1,3 @@
 discord.py
 PyDictionary
+wikipedia-api
