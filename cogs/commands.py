@@ -11,10 +11,9 @@ class Commands(commands.Cog):
     async def ping(self, ctx):
         await ctx.send(f"Latency - {round(self.client.latency * 1000)}")
 
-    @commands.command()
-    async def purge(self, ctx, amount=100):
-        channel = ctx.channel
-        await channel.purge(limit=amount)
+
+
+
 
 
 def setup(client):
