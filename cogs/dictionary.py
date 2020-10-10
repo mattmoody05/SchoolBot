@@ -3,6 +3,7 @@ from discord.ext import commands
 
 from PyDictionary import PyDictionary
 dictionary = PyDictionary()
+import requests
 
 class define(commands.Cog):
     def __init__(self, client):
@@ -20,6 +21,28 @@ class define(commands.Cog):
             DefinitionEmbed.add_field(name = list(Definition)[i], value=(Definition[list(Definition)[i]]), inline=False)
         
         await ctx.send(embed = DefinitionEmbed)
+
+    
+    @commands.command()
+    async def synonym(self, ctx, arg):
+        Synonyms = str(dictionary.synonym(arg)).replace("[", "").replace("]", "").split(",")
+        await ctx.send(Synonyms)
+
+        SynonymEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        SynonymEmbed.set_author(name='Synonyms for "{}"'.format(arg))
+        for i in range(len(Synonyms)):
+            SynonymEmbed.add_field(name=Synonyms[i], value=dictionary.meaning(Synonyms[i]))
+            print(dictionary.meaning(Synonyms[i]))
+        
+
+        await ctx.send(embed = SynonymEmbed)
+
+    @commands.command()
+    async def test(self, ctx, arg):
+        await ctx.send("pong")
+
 
 
 def setup(client):
