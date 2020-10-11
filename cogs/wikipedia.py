@@ -10,7 +10,8 @@ class Wikipedia(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     async def wiki(self, ctx):
-        await ctx.send(f"{ctx.author.mention} please specify some task :)")
+        await ctx.message.delete(delay=10)
+        await ctx.send(f"{ctx.author.mention} please specify some task :)", delete_after=10)
 
     @wiki.command()
     async def summary(self, ctx, *, query: str):
@@ -32,7 +33,8 @@ class Wikipedia(commands.Cog):
             await ctx.send(embed=embed)
 
         else:
-            await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)")
+            await ctx.message.delete(delay=10)
+            await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)", delete_after=10)
 
     @wiki.command()
     async def full(self, ctx, *, query: str):
@@ -47,8 +49,26 @@ class Wikipedia(commands.Cog):
             pager.add_line(line=f"Title : {title}")
             pager.add_line(line=f"Full Text - ")
 
+            for line in content.splitlines(keepends=True):
+                if len(line) < 1992:
+                    pager.add_line(line)
+                else:
+                    lines = line.split(".")
+                    for sl in lines:
+                        pager.add_line(sl)
+
+            for page in pager.pages:
+                try:
+                    await ctx.author.send(page)
+                except discord.Forbidden:
+                    await ctx.message.delete(delay=10)
+                    await ctx.send(f"{ctx.author.mention} Could not DM you :)", delete_after=10)
+                    break
+
         else:
             await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)")
+
+
 
 
 def setup(client):
