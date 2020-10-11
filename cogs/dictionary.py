@@ -4,7 +4,6 @@ from discord.ext import commands
 
 # dictionary imports
 from PyDictionary import PyDictionary
-
 dictionary = PyDictionary()
 
 

@@ -44,11 +44,10 @@ async def reload(ctx):
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             client.unload_extension(f'cogs.{filename[:-3]}')
-            await ctx.send("Unloaded cog: {0}".format(filename))
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             client.load_extension(f'cogs.{filename[:-3]}')
-            await ctx.send("Loaded cog: {0}".format(filename))
+    await ctx.send("Cogs reloaded")
 
 
 client.run(BOTTOKEN)
