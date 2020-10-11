@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 import math
 
 
@@ -8,7 +9,11 @@ class Math(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     async def math(self, ctx):
-        await ctx.send(f"{ctx.author.mention} please specify some task :)")
+        TaskErrorEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        TaskErrorEmbed.set_author(name = "Please specify a math task!")
+        await ctx.send(embed = TaskErrorEmbed)
 
     @math.command(aliases=["addition", "sum"])
     async def add(self, ctx, *args):

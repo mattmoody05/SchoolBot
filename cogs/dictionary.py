@@ -4,17 +4,25 @@ from discord.ext import commands
 
 # dictionary imports
 from PyDictionary import PyDictionary
-dictionary = PyDictionary()
 
 
 class dictionary(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.group(invoke_without_command=True)
+    async def dict(self, ctx):
+        TaskErrorEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        TaskErrorEmbed.set_author(name = "Please specify a dict task!")
+        await ctx.send(embed = TaskErrorEmbed)
+
+
     # definitions
-    @commands.command()
+    @dict.command(aliases=["def"])
     async def define(self, ctx, arg):
-        Definition = dictionary.meaning(arg)  # getting the defintion using PyDictionary
+        Definition = PyDictionary().meaning(arg)  # getting the defintion using PyDictionary
 
         # creating the embed that the defintions will be delivered in
         DefinitionEmbed = discord.Embed(
@@ -31,9 +39,9 @@ class dictionary(commands.Cog):
         await ctx.send(embed=DefinitionEmbed)
 
     # synonyms
-    @commands.command()
+    @dict.command(aliases=["syn"])
     async def synonym(self, ctx, arg):
-        Synonyms = str(dictionary.synonym(arg)).replace("[", "").replace("]", "").replace("'", "").split(
+        Synonyms = str(PyDictionary().synonym(arg)).replace("[", "").replace("]", "").replace("'", "").split(
             ",")  # getting the synonyms and putting them in a list (while removing any characters that are not needed)
 
         # getting all the characters and putting them into one string, each word on a new line        

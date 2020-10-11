@@ -2,8 +2,10 @@ Theme : For Students
 
 1. Maths commands
     - quadratic solver?
+    - work done upto 10/10/20
 2. Wikipedia and their API
     - currently working on this 10/10/20
+    - completed 11/10/20
 3. Meaning or synonyms of any word
     - currently working on this 09/10/20
     - basic funtionality, needs to be formatted better
@@ -17,5 +19,12 @@ Theme : For Students
 9. Basic kick ban commands
     - completed 10/10/20
 10. Homework tracking system (would require db work)
+11. Possible - Modmail? (i have already programmed a modmail bot so some of my code could be used)
+
+
+Matt's Current Work:
+    - Help commands
+    - Making embeds etc consistent across all parts of the bot
+
 
 It would be nice if you add some stuff here :)
