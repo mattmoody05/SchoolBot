@@ -2,6 +2,14 @@ import discord
 from discord.ext import commands
 from youtube_search import YoutubeSearch
 import json
+from pytube import YouTube
+import os
+import time
+
+def YTDownloadVideo(url):
+    yt = YouTube(url)
+    yt.streams.filter(file_extension="mp4").get_lowest_resolution().download(filename = "temp")
+
 
 class youtube(commands.Cog):
     def __init__(self, client):
@@ -36,6 +44,29 @@ class youtube(commands.Cog):
         SearchEmbed.set_image(url = resultsjson['videos'][0]['thumbnails'][0])
 
         await ctx.send(embed = SearchEmbed)
+
+
+    @youtube.command(aliases = ["v"])
+    async def video(self, ctx, arg):
+        VideoTitle = (YouTube(arg).title)
+        GettingDownloadEmbed = discord.Embed(
+            colour = discord.Colour.light_gray(),
+            description = "Please note that videos are in low quality due to the discord upload cap"
+        )
+        GettingDownloadEmbed.set_author(name = "Getting video '{0}' from youtube".format(VideoTitle))
+        if YouTube(arg).length > 120:
+            TooLongEmbed = discord.Embed(
+                colour = discord.Colour.light_gray(),
+                description = "Due to the discord upload cap, you can only download videos that a shorter than 120 seconds in length"
+            )
+            TooLongEmbed.set_author(name = "The video you have requested is too long.")
+            await ctx.send(embed = TooLongEmbed)
+        else:
+            await ctx.send(embed = GettingDownloadEmbed)
+            YTDownloadVideo(arg)
+            await ctx.send(file = discord.File("temp.mp4".format(VideoTitle)))
+            time.sleep(1)
+            os.remove("temp.mp4")
 
 
 def setup(client):

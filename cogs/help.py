@@ -9,7 +9,7 @@ MainEmbed = discord.Embed(
 )
 MainEmbed.set_author(name = "Schoolbot Help")
 MainEmbed.add_field(name = "Help Areas", value = "Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***", inline = False)
-MainEmbed.add_field(name = "Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- other")
+MainEmbed.add_field(name = "Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- youtube\n- other")
 
 
 # other embed
@@ -18,6 +18,7 @@ OtherEmbed = discord.Embed(
 )
 OtherEmbed.set_author(name = "Schoolbot - Other help")
 OtherEmbed.add_field(name = "ping", value = "Returns your latency to the bot in ms")
+OtherEmbed.add_field(name = "timer <h> <m> <s>", value = "Sets a timer for the amount of time you have provided")
 
 
 # wiki embed
@@ -58,6 +59,16 @@ MathEmbed.set_author(name = "Schoolbot - Math help")
 MathEmbed.add_field(name = "Commands", value = "math add\nmath multiply\nmath divide\nmath power\nmath root\nmath sin\nmath cos\nmath tan\nmath cossec\nmath sec\nmath cot\nmath hcf\nmath lcm\nmath factorial\nmath gamma\nmath round")
 
 
+# youtube embed
+YTEmbed = discord.Embed(
+    colour = discord.Colour.light_gray()
+)
+YTEmbed.set_author(name = "Schoolbot help - Youtube")
+YTEmbed.add_field(name = "youtube search <query>", value = "Searches youtube and returns info on your query", inline=False)
+YTEmbed.add_field(name = "youtube mp3 <url>", value = "Converts the youtube video, that is linked to the url provided, into an MP3 file", inline=False)
+YTEmbed.add_field(name = "youtube video <url>", value = "Outputs a download link for the youtube video url provided", inline=False)
+
+
 class help(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -85,6 +96,10 @@ class help(commands.Cog):
     @help.command()
     async def moderation(self, ctx):
         await ctx.send(embed = ModEmbed)
+
+    @help.command(aliases = ["yt"])
+    async def youtube(self, ctx):
+        await ctx.send(embed = YTEmbed)
 
 
 

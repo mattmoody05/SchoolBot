@@ -30,7 +30,9 @@ Matt's Current Work:
     - Help commands
     - Making embeds etc consistent across all parts of the bot
     - youtube stuff
-        - search done, possible yt download system?
+        - search done
+        - video download done
+        - audio download (currently working on)
 
 
 It would be nice if you add some stuff here :)

@@ -32,7 +32,12 @@ class Commands(commands.Cog):
                 record += f"{value} {key} "
             else:
                 record += f"{value} {key + 's'} "
-        await ctx.send(record)
+
+        TimerEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        TimerEmbed.set_author(name = record)
+        await ctx.send(embed = TimerEmbed)
 
         await ctx.send(f"{ctx.author.mention} timer started!")
         await asyncio.sleep(seconds)
