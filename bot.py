@@ -15,7 +15,7 @@ BOTPREFIX = data['prefix']
 BOTTOKEN = data['token']
 
 # declaring the client object
-client = commands.Bot(command_prefix=BOTPREFIX)
+client = commands.AutoShardedBot(command_prefix=BOTPREFIX)
 
 # removing the default help command so that a better one can be made using embeds
 client.remove_command("help")

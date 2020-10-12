@@ -14,6 +14,7 @@ Theme : For Students
 4. Translate to any language
 5. Time table management using DB
 6. Timer (maybe with DB)
+    - Completed (without DB)
 7. Youtube search
 8. Music system (maybe :/ I know lavalink tho)
 9. Basic kick ban commands

@@ -1,6 +1,7 @@
 # imports
 import discord
 from discord.ext import commands
+import asyncio
 
 
 class Commands(commands.Cog):
@@ -11,9 +12,31 @@ class Commands(commands.Cog):
     async def ping(self, ctx):
         await ctx.send(f"Latency - {round(self.client.latency * 1000)}")
 
+    @commands.command()
+    async def timer(self, ctx, hour: int, minute: int, second: int):
+        hour_seconds = hour * 60 * 60
+        minute_seconds = minute * 60
+        seconds = hour_seconds + minute_seconds + second
 
+        time = {}
+        if hour != 0:
+            time["hour"] = hour
+        if minute != 0:
+            time["minute"] = minute
+        if second != 0:
+            time["second"] = second
 
+        record = "Timer added for - "
+        for key, value in time.items():
+            if value == 1:
+                record += f"{value} {key} "
+            else:
+                record += f"{value} {key + 's'} "
+        await ctx.send(record)
 
+        await ctx.send(f"{ctx.author.mention} timer started!")
+        await asyncio.sleep(seconds)
+        await ctx.send(f"{ctx.author.mention} time over!")
 
 
 def setup(client):
