@@ -1,3 +1,4 @@
 discord.py
 PyDictionary
 Wikipedia-API
+youtube-search

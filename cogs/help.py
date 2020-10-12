@@ -3,9 +3,6 @@ from discord.ext import commands
 import discord
 
 
-# (name = "Math", value="*math add* - Adds the numbers given (each seperated by a space)\n*math multiply* - Multiplies the numbers given (each seperated by a space)\n*math divide* - Divides the numbers given (each seperated by a space)\n*math power <a> <b>* - Calculates a to the power of b\n*math sqrt <number>* - Finds the square root of the number entered", inline=False)
-
-
 # main embed
 MainEmbed = discord.Embed(
     colour = discord.Colour.light_gray()
@@ -52,6 +49,14 @@ ModEmbed.add_field(name = "ban @member", value = "Bans the mentioned member")
 ModEmbed.add_field(name = "purge <number>", value = "Deletes the specified number of messages")
 
 
+# math embed
+MathEmbed = discord.Embed(
+    colour = discord.Colour.light_gray(),
+    description = "The names of these commands are self-explanitary, please use common sense to determine what they do."
+)
+MathEmbed.set_author(name = "Schoolbot - Math help")
+MathEmbed.add_field(name = "Commands", value = "math add\nmath multiply\nmath divide\nmath power\nmath root\nmath sin\nmath cos\nmath tan\nmath cossec\nmath sec\nmath cot\nmath hcf\nmath lcm\nmath factorial\nmath gamma\nmath round")
+
 
 class help(commands.Cog):
     def __init__(self, client):
@@ -63,7 +68,7 @@ class help(commands.Cog):
 
     @help.command()
     async def math(self, ctx):
-        await ctx.send("embed = ")
+        await ctx.send(embed = MathEmbed)
 
     @help.command()
     async def other(self, ctx):
