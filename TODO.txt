@@ -21,6 +21,9 @@ Theme : For Students
     - completed 10/10/20
 10. Homework tracking system (would require db work)
 11. Possible - Modmail? (i have already programmed a modmail bot so some of my code could be used)
+12. Email verification system
+13. note sharing (maybe markdown based?)
+14. Poll system (reactions and embeds could be used)
 
 
 Matt's Current Work:
