@@ -29,15 +29,14 @@ class StudyMode(commands.Cog):
             record = await self.client.db.fetch_all_study_modes()
             if record:
                 mentions = [x.id for x in message.mentions if not x.bot]
-                for id in record[0]:
-                    if message.author.id == id:
+                print(mentions)
+                for author_id in record:
+                    if message.author.id == author_id[0]:
                         await message.delete()
-                        await message.channel.send(f"{message.author.mention} please go to study :)")
-                        break
-                    elif id in mentions:
+                        await message.channel.send(f"{message.author.mention} please go to Study!")
+                    if author_id[0] in mentions:
                         await message.delete()
-                        await message.channel.send(f"{message.author.mention} {self.client.get_user(id)} is Studying please do not disturb :)")
-                        break
+                        await message.channel.send(f"{message.author.mention} {self.client.get_user(author_id[0])} is studying please dont disturb him :)")
 
 
 def setup(client):
