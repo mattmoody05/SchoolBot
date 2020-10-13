@@ -1,7 +1,7 @@
 # imports
 import json
 import os
-import time
+from cogs.DataBase.client import DataBase
 
 import discord
 from discord.ext import commands
@@ -17,8 +17,23 @@ BOTTOKEN = data['token']
 # declaring the client object
 client = commands.AutoShardedBot(command_prefix=BOTPREFIX)
 
+client.info = {
+    "host": data["host"],
+    "database": data["database"],
+    "user": data["user"],
+    "port": data["port"],
+    "password": data["password"],
+    "max_size": data["max_size"],
+    "min_size": data["min_size"]
+}
+
 # removing the default help command so that a better one can be made using embeds
 client.remove_command("help")
+
+
+@client.event
+async def on_connect():
+    client.db = await DataBase.create_pool(client=client, info=client.info)
 
 
 # changing the bot's status to "Listening to $help" and printing that the bot has logged in without any issues
