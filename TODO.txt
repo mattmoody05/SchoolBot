@@ -13,9 +13,11 @@ Theme : For Students
     - comments added, all complete
 4. Translate to any language
 5. Time table management using DB
+    - completed without embedding
 6. Timer (maybe with DB)
     - Completed (without DB)
 7. Youtube search
+    - completed by matt
 8. Music system (maybe :/ I know lavalink tho)
 9. Basic kick ban commands
     - completed 10/10/20
