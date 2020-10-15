@@ -7,7 +7,7 @@ class StudyMode(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(aliases=["sm"])
     async def study_mode(self, ctx):
         if ctx.author.bot:
             return
@@ -29,12 +29,11 @@ class StudyMode(commands.Cog):
             record = await self.client.db.fetch_all_study_modes()
             if record:
                 mentions = [x.id for x in message.mentions if not x.bot]
-                print(mentions)
                 for author_id in record:
-                    if message.author.id == author_id[0]:
+                    if message.author.id == author_id["user_id"]:
                         await message.delete()
                         await message.channel.send(f"{message.author.mention} please go to Study!")
-                    if author_id[0] in mentions:
+                    if author_id["user_id"] in mentions:
                         await message.delete()
                         await message.channel.send(f"{message.author.mention} {self.client.get_user(author_id[0])} is studying please dont disturb him :)")
 

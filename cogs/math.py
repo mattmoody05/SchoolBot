@@ -97,6 +97,12 @@ class Math(commands.Cog):
         floor = round(a)
         await ctx.send(floor)
 
+    @math.command(aliases=["mean"])
+    async def average(self, ctx, *numbers):
+        add = sum(i for i in map(int, numbers))
+        total = len(numbers)
+        await ctx.send(add/total)
+
 
 def setup(client):
     client.add_cog(Math(client))

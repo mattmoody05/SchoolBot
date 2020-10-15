@@ -13,11 +13,10 @@ class dictionary(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def dict(self, ctx):
         TaskErrorEmbed = discord.Embed(
-            colour = discord.Colour.light_gray()
+            colour=discord.Colour.light_gray()
         )
-        TaskErrorEmbed.set_author(name = "Please specify a dict task!")
-        await ctx.send(embed = TaskErrorEmbed)
-
+        TaskErrorEmbed.set_author(name="Please specify a dict task!")
+        await ctx.send(embed=TaskErrorEmbed)
 
     # definitions
     @dict.command(aliases=["def"])
@@ -30,13 +29,18 @@ class dictionary(commands.Cog):
         )
         DefinitionEmbed.set_author(name='Definition of "{}"'.format(arg))
 
-        # adding the definitions to the embed
-        for i in range(len(Definition)):
-            CurrentDef = str(Definition[list(Definition)[i]]).replace("[", "").replace("]", "")
-            DefinitionEmbed.add_field(name=list(Definition)[i], value=CurrentDef, inline=False)
+        try:
+            # adding the definitions to the embed
+            for i in range(len(Definition)):
+                CurrentDef = str(Definition[list(Definition)[i]]).replace("[", "").replace("]", "")
+                DefinitionEmbed.add_field(name=list(Definition)[i], value=CurrentDef, inline=False)
 
-        # sending the embed
-        await ctx.send(embed=DefinitionEmbed)
+            # sending the embed
+            await ctx.send(embed=DefinitionEmbed)
+        except TypeError:
+            await ctx.send(f"There is no meaning for this word :(")
+        except:
+            raise
 
     # synonyms
     @dict.command(aliases=["syn"])

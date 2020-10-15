@@ -8,12 +8,12 @@ class Wikipedia(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.group(invoke_without_command=True)
+    @commands.group(invoke_without_command=True, aliases=["wikipedia"])
     async def wiki(self, ctx):
         await ctx.message.delete(delay=10)
         await ctx.send(f"{ctx.author.mention} please specify some task :)", delete_after=10)
 
-    @wiki.command()
+    @wiki.command(aliases=["s"])
     async def summary(self, ctx, *, query: str):
         ww = wikipediaapi.Wikipedia(language="en")
         page = ww.page(query)
@@ -36,7 +36,7 @@ class Wikipedia(commands.Cog):
             await ctx.message.delete(delay=10)
             await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)", delete_after=10)
 
-    @wiki.command()
+    @wiki.command(aliases=["f"])
     async def full(self, ctx, *, query: str):
         ww = wikipediaapi.Wikipedia(language="en", extract_format=wikipediaapi.ExtractFormat.WIKI)
         page = ww.page(query)
@@ -67,8 +67,6 @@ class Wikipedia(commands.Cog):
 
         else:
             await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)")
-
-
 
 
 def setup(client):

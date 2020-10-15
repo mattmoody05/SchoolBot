@@ -30,3 +30,12 @@ class DataBase:
         query = """SELECT user_id FROM study_mode WHERE mode=$1"""
         record = await self.pool.fetch(query, True)
         return record
+
+    async def insert_time_table(self, day: str, user_id: int, time: str, work: str):
+        query = """INSERT INTO time_table (day, user_id, time, work) VALUES ($1, $2, $3, $4)"""
+        await self.pool.execute(query, day, user_id, time, work)
+
+    async def check_todays_time_table(self, day, time):
+        query = """SELECT user_id, work FROM time_table WHERE day=$1 AND time=$2"""
+        record = await self.pool.fetch(query, day, time)
+        return record
