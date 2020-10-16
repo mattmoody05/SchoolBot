@@ -19,6 +19,7 @@ class Commands(commands.Cog):
             8: '8️⃣',
             9: '9️⃣',
             10: '🔟'}
+        self.thumbs = ("👍", "👎")
 
     @commands.command()
     async def ping(self, ctx):
@@ -101,31 +102,59 @@ class Commands(commands.Cog):
         channel = self.client.get_channel(payload.channel_id)
         message = await channel.fetch_message(payload.message_id)
 
-        check = await self.poll_check(message)
-        if not check:
+        poll_checking = self.poll_check(message)
+
+        if poll_checking:
+            if str(payload.emoji) not in list(self.numbers.values()):
+                user = self.client.get_user(payload.user_id)
+                await message.remove_reaction(payload.emoji, user)
+                return
+
+            reaction_poll_checking = message.reactions
+            member = self.client.get_user(payload.user_id)
+
+            for reaction in reaction_poll_checking:
+                async for user in reaction.users():
+                    if str(user) == str(member) and str(payload.emoji) != str(reaction.emoji):
+                        await message.remove_reaction(payload.emoji, member)
             return
 
-        if str(payload.emoji) not in list(self.numbers.values()):
-            user = self.client.get_user(payload.user_id)
-            await message.remove_reaction(payload.emoji, user)
+        suggest_checking = self.suggest_check(message)
 
-        reactions = message.reactions
-        member = self.client.get_user(payload.user_id)
+        if suggest_checking:
+            if str(payload.emoji) not in self.thumbs:
+                user = self.client.get_user(payload.user_id)
+                await message.remove_reaction(payload.emoji, user)
 
-        for reaction in reactions:
-            async for user in reaction.users():
-                if str(user) == str(member) and str(payload.emoji) != str(reaction.emoji):
-                    await message.remove_reaction(payload.emoji, member)
+            reactions_suggest_checking = message.reactions
+            member = self.client.get_user(payload.user_id)
 
-    async def poll_check(self, message):
+            for reaction in reactions_suggest_checking:
+                async for user in reaction.users():
+                    if str(user) == str(member) and str(payload.emoji) != str(reaction.emoji):
+                        await message.remove_reaction(payload.emoji, member)
+
+
+
+    def poll_check(self, message):
         try:
             embed = message.embeds[0]
         except:
             return False
         text = str(embed.footer.text)
-        if not text.startswith("Poll by -") == 1:
+        if text.startswith("Poll by") == 1 and message.author.id == self.client.user.id:
+            return True
+        return False
+
+    def suggest_check(self, message):
+        try:
+            embed = message.embeds[0]
+        except:
             return False
-        return True
+        text = str(embed.author.name)
+        if text.startswith("Poll by") == 1 and message.author.id == self.client.user.id:
+            return True
+        return False
 
 
 def setup(client):

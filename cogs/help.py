@@ -19,6 +19,8 @@ OtherEmbed = discord.Embed(
 OtherEmbed.set_author(name="Schoolbot - Other help")
 OtherEmbed.add_field(name="ping", value="Returns your latency to the bot in ms")
 OtherEmbed.add_field(name="timer <h> <m> <s>", value="Sets a timer for the amount of time you have provided")
+OtherEmbed.add_field(name="suggest", value="Makes a yes no poll")
+OtherEmbed.add_field(name='poll "description" "choice1" "choice2"', value="Makes a poll with multiple choices")
 
 # wiki embed
 WikiEmbed = discord.Embed(
@@ -54,7 +56,7 @@ MathEmbed = discord.Embed(
 )
 MathEmbed.set_author(name="Schoolbot - Math help")
 MathEmbed.add_field(name="Commands",
-                    value="math add\nmath multiply\nmath divide\nmath power\nmath root\nmath sin\nmath cos\nmath tan\nmath cossec\nmath sec\nmath cot\nmath hcf\nmath lcm\nmath factorial\nmath gamma\nmath round")
+                    value="math add\nmath multiply\nmath divide\nmath power\nmath root\nmath sin\nmath cos\nmath tan\nmath cossec\nmath sec\nmath cot\nmath hcf\nmath lcm\nmath factorial\nmath gamma\nmath round\nmath average")
 
 # youtube embed
 YTEmbed = discord.Embed(
@@ -62,14 +64,9 @@ YTEmbed = discord.Embed(
 )
 YTEmbed.set_author(name="Schoolbot help - Youtube")
 YTEmbed.add_field(name="youtube search <query>", value="Searches youtube and returns info on your query", inline=False)
-YTEmbed.add_field(name="youtube mp3 <url>",
-                  value="Converts the youtube video, that is linked to the url provided, into an MP3 file",
-                  inline=False)
-YTEmbed.add_field(name="youtube video <url>", value="Outputs a download link for the youtube video url provided",
-                  inline=False)
 
 
-class help(commands.Cog):
+class Help(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -103,4 +100,4 @@ class help(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(help(client))
+    client.add_cog(Help(client))
