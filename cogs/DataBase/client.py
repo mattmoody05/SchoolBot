@@ -48,3 +48,8 @@ class DataBase:
     async def delete_from_time_table(self, day: str, user_id: int, time: str):
         query = """DELETE FROM time_table WHERE day=$1 AND user_id=$2 AND time=$3"""
         await self.pool.execute(query, day, user_id, time)
+
+    async def select_all_from_time_table(self, user_id: int):
+        query = """SELECT day, time, work FROM time_table WHERE user_id=$1"""
+        record = await self.pool.fetch(query, user_id)
+        return record

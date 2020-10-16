@@ -76,6 +76,11 @@ class TimeTable(commands.Cog):
             await self.client.db.delete_from_time_table(day, user_id, valid_time)
             await ctx.send(f"Task Deleted successfully!")
 
+    @time_table.command()
+    async def all(self, ctx):
+        user_id = ctx.author.id
+        records = await self.client.db.select_all_from_time_table(user_id)
+        print(records)
 
 def setup(client):
     client.add_cog(TimeTable(client))
