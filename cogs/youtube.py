@@ -9,10 +9,6 @@ import time
 def YTDownloadVideo(url):
     yt = YouTube(url)
     yt.streams.filter(file_extension="mp4").get_lowest_resolution().download(filename = "temp")
-	
-def YTAudioStreams(url):
-	yt = YouTube(url)
-	return yt.streams.filter(only_audio = True)
 
 
 class youtube(commands.Cog):
@@ -71,33 +67,6 @@ class youtube(commands.Cog):
             await ctx.send(file = discord.File("temp.mp4".format(VideoTitle)))
             time.sleep(1)
             os.remove("temp.mp4")
-			
-	
-	@youtube.group(aliases = ["a"], invoke_without_command = True)
-	async def audio(self, ctx):
-		TaskErrorEmbed = discord.Embed(
-            colour = discord.Colour.light_gray()
-        )
-        TaskErrorEmbed.set_author(name = "Please specify a youtube audio task!")
-        await ctx.send(embed = TaskErrorEmbed)
-	
-	
-	@audio.command(aliases = ["s"])
-	async def streams(self, ctx, arg):
-		VideoTitle = YouTube(arg).title
-		AudioStreamsEmbed = discord.Embed(
-			colour = discord.Colour.light_gray()
-		)
-		AudioStreamsEmbed.set_author(name = "Getting audio streams of Youtube video '{}'".format(VideoTitle))
-		AudioStreamsEmbed.add_field(name = "Streams", value = YTAudioStreams(arg))
-		
-		
-	@audio.command(aliases = ["dl"])
-	async def download(self, ctx, arg):
-		# get the list of streams (itag?)
-		# identify the stream that they have input
-		# download the stream as store as temp
-		# send the stream using await ctx.send(file = discord.File("temp"))
 
 
 def setup(client):
