@@ -10,7 +10,7 @@ MainEmbed.set_author(name="Schoolbot Help")
 MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
-MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- other", inline=False)
+MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- other", inline=False)
 
 # other embed
 OtherEmbed = discord.Embed(
@@ -75,6 +75,19 @@ TTEmbed.add_field(name="time_table insert <Name of the day> <Time in GMT> <Work>
 TTEmbed.add_field(name="time_table delete <Name of the day> <Time>", value="Deletes the task if it exists", inline=False)
 TTEmbed.add_field(name="time_table all", value="Sends all your schedule", inline=False)
 
+# todo
+TDEmbed = discord.Embed(
+    colour=discord.Colour.light_gray())
+TDEmbed.set_author(name="Schoolbot help - Todo")
+TDEmbed.add_field(name="todo insert <work>", value="Inserts the work in your todo list", inline=False)
+TDEmbed.add_field(name="todo delete <work>", value="Deletes the work from your todo list", inline=False)
+TDEmbed.add_field(name="todo all", value="Sends your todo list")
+
+# notes sharing
+NSEmbed = discord.Embed(colour=discord.Colour.light_grey())
+NSEmbed.set_author(name="Schoolbot help - Notes Sharing")
+NSEmbed.add_field(name="Pasting with - <title> | <description>", value="Just paste the picture and it would be formatted into a well embed \n Note: The picture should be in a proper channel name e.g - #notes-sharing")
+
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -96,11 +109,11 @@ class Help(commands.Cog):
     async def wiki(self, ctx):
         await ctx.send(embed=WikiEmbed)
 
-    @help.command()
+    @help.command(aliases=["dict"])
     async def dictionary(self, ctx):
         await ctx.send(embed=DictEmbed)
 
-    @help.command()
+    @help.command(aliases=["mod"])
     async def moderation(self, ctx):
         await ctx.send(embed=ModEmbed)
 
@@ -111,6 +124,14 @@ class Help(commands.Cog):
     @help.command(aliases=["tt"])
     async def time_table(self, ctx):
         await ctx.send(embed=TTEmbed)
+
+    @help.command(aliases=["td"])
+    async def todo(self, ctx):
+        await ctx.send(embed=TDEmbed)
+
+    @help.command(aliases=["ns"])
+    async def notes_sharing(self, ctx):
+        await ctx.send(embed=NSEmbed)
 
 
 def setup(client):
