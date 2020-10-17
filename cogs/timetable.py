@@ -33,6 +33,7 @@ class TimeTable(commands.Cog):
 
     @time_table.command()
     async def insert(self, ctx, day: str, time: str, *, text: str):
+        await ctx.message.delete()
         day = day.lower()
         valid_time = " ".join(t for t in time.split(":"))
         work = await commands.clean_content().convert(ctx=ctx, argument=text)
@@ -40,18 +41,15 @@ class TimeTable(commands.Cog):
         open_dms = False
         user_id = ctx.author.id
         if day not in week_days:
-            await ctx.message.delete()
             await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday", delete_after=10)
             return
         if time.count(":") < 1:
-            await ctx.message.delete()
             await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10", delete_after=10)
             return
         try:
             await ctx.author.send(f"Time set for - {' '.join([day.title(), valid_time, work])}")
             open_dms = True
         except discord.Forbidden:
-            await ctx.message.delete()
             await ctx.send(
                 "You cant use this because I need to DM you :), please change your Privacy settings to use this Command!", delete_after=10)
             open_dms = False
@@ -62,16 +60,15 @@ class TimeTable(commands.Cog):
 
     @time_table.command()
     async def delete(self, ctx, day: str, time: str):
+        await ctx.message.delete()
         day = day.lower()
         valid_time = " ".join(t for t in time.split(":"))
         week_days = self.week_days
         user_id = ctx.author.id
         if day not in week_days:
-            await ctx.message.delete()
             await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday", delete_after=10)
             return
         if time.count(":") < 1:
-            await ctx.message.delete()
             await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10", delete_after=10)
             return
         records = await self.client.db.check_if_in_time_table(day, user_id, valid_time)

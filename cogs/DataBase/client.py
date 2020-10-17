@@ -53,3 +53,21 @@ class DataBase:
         query = """SELECT day, time, work FROM time_table WHERE user_id=$1"""
         record = await self.pool.fetch(query, user_id)
         return record
+
+    async def insert_into_todo(self, user_id: int, work: str, time: str):
+        query = """INSERT INTO todo (user_id, work, time) VALUES ($1, $2, $3)"""
+        await self.pool.execute(query, user_id, work, time)
+
+    async def check_from_todo(self, user_id: int, work: str):
+        query = """SELECT * FROM todo WHERE user_id=$1 AND work=$2"""
+        record = await self.pool.fetch(query, user_id, work)
+        return record
+
+    async def delete_from_todo(self, user_id: int, work: str):
+        query = """DELETE FROM todo WHERE user_id=$1 AND work=$2"""
+        await self.pool.execute(query, user_id, work)
+
+    async def select_all_from_todo(self, user_id: int):
+        query = """SELECT * FROM todo WHERE user_id=$1"""
+        record = await self.pool.fetch(query, user_id)
+        return record
