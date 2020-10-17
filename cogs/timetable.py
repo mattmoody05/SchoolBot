@@ -28,7 +28,8 @@ class TimeTable(commands.Cog):
 
     @commands.group(invoke_without_command=True, aliases=["tt"])
     async def time_table(self, ctx):
-        await ctx.send(f"{ctx.author.mention} please specify a Task :)")
+        await ctx.message.delete()
+        await ctx.send(f"{ctx.author.mention} please specify a Task :)", delete_after=10)
 
     @time_table.command()
     async def insert(self, ctx, day: str, time: str, *, text: str):
@@ -39,17 +40,20 @@ class TimeTable(commands.Cog):
         open_dms = False
         user_id = ctx.author.id
         if day not in week_days:
-            await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday", delete_after=10)
             return
         if time.count(":") < 1:
-            await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10", delete_after=10)
             return
         try:
             await ctx.author.send(f"Time set for - {' '.join([day.title(), valid_time, work])}")
             open_dms = True
         except discord.Forbidden:
+            await ctx.message.delete()
             await ctx.send(
-                "You cant use this because I need to DM you :), please change your Privacy settings to use this Command!")
+                "You cant use this because I need to DM you :), please change your Privacy settings to use this Command!", delete_after=10)
             open_dms = False
             await ctx.message.delete()
         if open_dms:
@@ -63,10 +67,12 @@ class TimeTable(commands.Cog):
         week_days = self.week_days
         user_id = ctx.author.id
         if day not in week_days:
-            await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} please Specify a valid day, eg - Monday", delete_after=10)
             return
         if time.count(":") < 1:
-            await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} please a valid time, eg - 10:10", delete_after=10)
             return
         records = await self.client.db.check_if_in_time_table(day, user_id, valid_time)
         if not records:
@@ -79,8 +85,27 @@ class TimeTable(commands.Cog):
     @time_table.command()
     async def all(self, ctx):
         user_id = ctx.author.id
-        records = await self.client.db.select_all_from_time_table(user_id)
-        print(records)
+        query = await self.client.db.select_all_from_time_table(user_id)
+        if not query:
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} you dont have a schedule yet", delete_after=10)
+            return
+
+        records = []
+
+        for record in query:
+            schedule = f"Day - {str(record['day']).title()}, Time - {record['time']}, Work - {record['work']}"
+            records.append(schedule)
+
+        records = sorted(records, reverse=True)
+        pager = commands.Paginator()
+
+        for record in records:
+            pager.add_line(record)
+
+        for page in pager.pages:
+            await ctx.author.send(page)
+
 
 def setup(client):
     client.add_cog(TimeTable(client))

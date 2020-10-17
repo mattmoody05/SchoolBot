@@ -10,17 +10,19 @@ MainEmbed.set_author(name="Schoolbot Help")
 MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
-MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- youtube\n- other")
+MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- other", inline=False)
 
 # other embed
 OtherEmbed = discord.Embed(
     colour=discord.Colour.light_gray()
 )
 OtherEmbed.set_author(name="Schoolbot - Other help")
-OtherEmbed.add_field(name="ping", value="Returns your latency to the bot in ms")
-OtherEmbed.add_field(name="timer <h> <m> <s>", value="Sets a timer for the amount of time you have provided")
-OtherEmbed.add_field(name="suggest", value="Makes a yes no poll")
-OtherEmbed.add_field(name='poll "description" "choice1" "choice2"', value="Makes a poll with multiple choices")
+OtherEmbed.add_field(name="ping", value="Returns your latency to the bot in ms", inline=False)
+OtherEmbed.add_field(name="timer <h> <m> <s>", value="Sets a timer for the amount of time you have provided", inline=False)
+OtherEmbed.add_field(name="suggest", value="Makes a yes no poll", inline=False)
+OtherEmbed.add_field(name='poll "description" "choice1" "choice2"', value="Makes a poll with multiple choices", inline=False)
+OtherEmbed.add_field(name='study_mode', value="Sets a study_mode for you, to help you concentrate on studies", inline=False)
+OtherEmbed.add_field(name='source <command>', value="Gives the source of a command", inline=False)
 
 # wiki embed
 WikiEmbed = discord.Embed(
@@ -28,16 +30,16 @@ WikiEmbed = discord.Embed(
 )
 WikiEmbed.set_author(name="Schoolbot - Wikipedia help")
 WikiEmbed.add_field(name="wiki summary <query>",
-                    value="Searches wikipedia for your query, returning a summary of that topic")
-WikiEmbed.add_field(name="wiki full <query>", value="Searches wikipedia for your query and returns the full article")
+                    value="Searches wikipedia for your query, returning a summary of that topic", inline=False)
+WikiEmbed.add_field(name="wiki full <query>", value="Searches wikipedia for your query and returns the full article", inline=False)
 
 # dictionary embed
 DictEmbed = discord.Embed(
     colour=discord.Colour.light_gray()
 )
 DictEmbed.set_author(name="Schoolbot - Dictionary help")
-DictEmbed.add_field(name="dict define <word>", value="Defines the word provided")
-DictEmbed.add_field(name="dict synonym <word>", value="Gives alternative words for the word provided")
+DictEmbed.add_field(name="dict define <word>", value="Defines the word provided", inline=False)
+DictEmbed.add_field(name="dict synonym <word>", value="Gives alternative words for the word provided", inline=False)
 
 # moderation embed
 ModEmbed = discord.Embed(
@@ -45,9 +47,9 @@ ModEmbed = discord.Embed(
     description="Please note that these moderation commands will require the correct permissions"
 )
 ModEmbed.set_author(name="Schoolbot - Moderation help")
-ModEmbed.add_field(name="kick @member", value="Kicks the mentioned member")
-ModEmbed.add_field(name="ban @member", value="Bans the mentioned member")
-ModEmbed.add_field(name="purge <number>", value="Deletes the specified number of messages")
+ModEmbed.add_field(name="kick @member", value="Kicks the mentioned member", inline=False)
+ModEmbed.add_field(name="ban @member", value="Bans the mentioned member", inline=False)
+ModEmbed.add_field(name="purge <number>", value="Deletes the specified number of messages", inline=False)
 
 # math embed
 MathEmbed = discord.Embed(
@@ -64,6 +66,14 @@ YTEmbed = discord.Embed(
 )
 YTEmbed.set_author(name="Schoolbot help - Youtube")
 YTEmbed.add_field(name="youtube search <query>", value="Searches youtube and returns info on your query", inline=False)
+
+# time-table embed
+TTEmbed = discord.Embed(
+    colour=discord.Colour.light_grey())
+TTEmbed.set_author(name="Schoolbot help - Time Table")
+TTEmbed.add_field(name="time_table insert <Name of the day> <Time in GMT> <Work>", value="Reminds you for for that task in your DM's \n e.g - $time_table insert Monday 03:33 Maths class", inline=False)
+TTEmbed.add_field(name="time_table delete <Name of the day> <Time>", value="Deletes the task if it exists", inline=False)
+TTEmbed.add_field(name="time_table all", value="Sends all your schedule", inline=False)
 
 
 class Help(commands.Cog):
@@ -97,6 +107,10 @@ class Help(commands.Cog):
     @help.command(aliases=["yt"])
     async def youtube(self, ctx):
         await ctx.send(embed=YTEmbed)
+
+    @help.command(aliases=["tt"])
+    async def time_table(self, ctx):
+        await ctx.send(embed=TTEmbed)
 
 
 def setup(client):

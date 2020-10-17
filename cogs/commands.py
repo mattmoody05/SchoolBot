@@ -73,10 +73,12 @@ class Commands(commands.Cog):
         await ctx.message.delete()
         numbers = self.numbers
         if len(options) < 2:
-            await ctx.send(f"{ctx.author.mention} please provide 2 or more options for the poll")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} please provide 2 or more options for the poll", delete_after=10)
             return
         if len(options) > 10:
-            await ctx.send(f"{ctx.author.mention} you cant make a poll with more than 10 options")
+            await ctx.message.delete()
+            await ctx.send(f"{ctx.author.mention} you cant make a poll with more than 10 options", delete_after=10)
             return
         poll_embed = discord.Embed(
             color=discord.Colour.light_grey()

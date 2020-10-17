@@ -15,7 +15,8 @@ class dictionary(commands.Cog):
         TaskErrorEmbed = discord.Embed(
             colour=discord.Colour.light_gray()
         )
-        TaskErrorEmbed.set_author(name="Please specify a dict task!")
+        await ctx.message.delete()
+        TaskErrorEmbed.set_author(name="Please specify a dict task!", delete_after=10)
         await ctx.send(embed=TaskErrorEmbed)
 
     # definitions
@@ -38,7 +39,8 @@ class dictionary(commands.Cog):
             # sending the embed
             await ctx.send(embed=DefinitionEmbed)
         except TypeError:
-            await ctx.send(f"There is no meaning for this word :(")
+            await ctx.message.delete()
+            await ctx.send(f"There is no meaning for this word :(", delete_after=10)
         except:
             raise
 
