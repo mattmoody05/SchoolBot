@@ -39,8 +39,7 @@ async def on_connect():
 # changing the bot's status to "Listening to $help" and printing that the bot has logged in without any issues
 @client.event
 async def on_ready():
-    ListeningTo = discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help")
-    await client.change_presence(status=discord.Status.online, activity=ListeningTo)
+    await client.change_presence(activity=discord.Game(name=f"{BOTPREFIX}help"))
     print('Logged in as {0.user}'.format(client))
 
 
