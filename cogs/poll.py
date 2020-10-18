@@ -1,5 +1,14 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour = discord.Colour.light_gray()
+    )
+    Embed.set_author(name = author)
+    return Embed
 
 
 class Poll(commands.Cog):
@@ -35,11 +44,13 @@ class Poll(commands.Cog):
         numbers = self.numbers
         if len(options) < 2:
             await ctx.message.delete()
-            await ctx.send(f"{ctx.author.mention} please provide 2 or more options for the poll", delete_after=10)
+            await ctx.send(ctx.author.mention, delete_after=10)
+            await ctx.send(embed = SimpleEmbed("Please provide 2 or more options for the poll"), delete_after=10)
             return
         if len(options) > 10:
             await ctx.message.delete()
-            await ctx.send(f"{ctx.author.mention} you cant make a poll with more than 10 options", delete_after=10)
+            await ctx.send(ctx.author.mention, delete_after=10)
+            await ctx.send(SimpleEmbed("You cant make a poll with more than 10 options"), delete_after=10)
             return
         poll_embed = discord.Embed(
             color=discord.Colour.light_grey()
