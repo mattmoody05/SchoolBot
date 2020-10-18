@@ -19,6 +19,7 @@ class dictionary(commands.Cog):
         TaskErrorEmbed.set_author(name="Please specify a dict task!", delete_after=10)
         await ctx.send(embed=TaskErrorEmbed)
 
+
     # definitions
     @dict.command(aliases=["def"])
     async def define(self, ctx, arg):
@@ -40,9 +41,14 @@ class dictionary(commands.Cog):
             await ctx.send(embed=DefinitionEmbed)
         except TypeError:
             await ctx.message.delete()
-            await ctx.send(f"There is no meaning for this word :(", delete_after=10)
+            NoMeaningEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            NoMeaningEmbed.set_author(name = "We could not find a meaning for this word.")
+            await ctx.send(embed = NoMeaningEmbed, delete_after=10)
         except:
             raise
+
 
     # synonyms
     @dict.command(aliases=["syn"])

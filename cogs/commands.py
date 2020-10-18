@@ -1,18 +1,27 @@
-# imports
-import asyncio
-import random
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports
+import asyncio
+import random
 
 
 class Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    # ping command
     @commands.command()
     async def ping(self, ctx):
-        await ctx.send(f"Latency - {round(self.client.latency * 1000)}")
+        LatencyEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        LatencyEmbed.set_author(name = f"Latency - {round(self.client.latency * 1000)}")
+        await ctx.send(embed = LatencyEmbed)
 
+
+    # timer command
     @commands.command()
     async def timer(self, ctx, hour: int, minute: int, second: int):
         hour_seconds = hour * 60 * 60
@@ -44,60 +53,117 @@ class Commands(commands.Cog):
         await asyncio.sleep(seconds)
         await ctx.send(f"{ctx.author.mention} time over!")
 
+
+    # dice roller
     @commands.command(aliases=["rd"])
     async def roll_dice(self, ctx):
         number = random.randint(1, 6)
-        await ctx.send(number)
+        NumberEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        NumberEmbed.set_author(name = "Your number: {}".format(number))
+        await ctx.send(embed = NumberEmbed)
 
+
+    # rock paper scissors command
     @commands.command(aliases=["sps"])
     async def stone_paper_scissor(self, ctx, opt: str):
         options = ("stone", "paper", "scissor")
         num = random.randint(0, 2)
         if opt.lower() not in options:
-            await ctx.send(f"{ctx.author.mention} please provide a valid option - (stone, paper, scissor)")
+            ErrorEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            ErrorEmbed.set_author(name = "{}, please provide a valid option - (stone, paper, scissor)".format(ctx.author.name))
+            await ctx.send(embed = ErrorEmbed)
             return
 
         option = opt.lower()
         opponent = options[num]
 
         if option == "stone" and opponent == "stone":
-            await ctx.send(f"{ctx.author.mention} It was a tie! The option was {opponent}")
+            WonEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            WonEmbed.set_author(name = "{0}, You won! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = WonEmbed)
             return
         if option == "stone" and opponent == "paper":
-            await ctx.send(f"{ctx.author.mention} You lost! The option was {opponent}")
+            LostEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            LostEmbed.set_author(name = "{0}, You lost! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = LostEmbed)
             return
         if option == "stone" and opponent == "scissor":
-            await ctx.send(f"{ctx.author.mention} You won! The option was {opponent}")
+            WonEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            WonEmbed.set_author(name = "{0}, You won! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = WonEmbed)
             return
         if option == "paper" and opponent == "stone":
-            await ctx.send(f"{ctx.author.mention} You won! The option was {opponent}")
+            WonEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            WonEmbed.set_author(name = "{0}, You won! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = WonEmbed)
             return
         if option == "paper" and opponent == "paper":
-            await ctx.send(f"{ctx.author.mention} It was a tie! The option was {opponent}")
+            TieEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            TieEmbed.set_author(name = "{0}, It was a tie! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = TieEmbed)
             return
         if option == "paper" and opponent == "scissor":
-            await ctx.send(f"{ctx.author.mention} You lost! The option was {opponent}")
+            LostEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            LostEmbed.set_author(name = "{0}, You lost! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = LostEmbed)
             return
         if option == "scissor" and opponent == "stone":
-            await ctx.send(f"{ctx.author.mention} You lost! The option was {opponent}")
+            LostEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            LostEmbed.set_author(name = "{0}, You lost! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = LostEmbed)
             return
         if option == "scissor" and opponent == "paper":
-            await ctx.send(f"{ctx.author.mention} You won! The option was {opponent}")
+            WonEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            WonEmbed.set_author(name = "{0}, You won! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = WonEmbed)
             return
         if option == "scissor" and opponent == "scissor":
-            await ctx.send(f"{ctx.author.mention} It was a tie! The option was {opponent}")
+            TieEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            TieEmbed.set_author(name = "{0}, It was a tie! The option was {1}".format(ctx.author.name, opponent))
+            await ctx.send(embed = TieEmbed)
             return
 
+
+    # number guessing game
     @commands.command(aliases=["ng"])
     async def number_guess(self, ctx):
         hidden_number = random.randint(1, 100)
         given_number = random.randint(1, 100)
 
-        await ctx.send(f"The number is {given_number}. Enter higher or lower")
+        
+        GivenNumberEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        GivenNumberEmbed.set_author(name = f"The number is {given_number}. Enter higher or lower")
+        await ctx.send(embed = GivenNumberEmbed)
+
 
         def check(message):
             content = str(message.content).lower()
             return content == "h" or content == "higher" or content == "l" or content == "lower"
+
 
         try:
             option = await self.client.wait_for("message", timeout=30, check=check)
@@ -106,24 +172,46 @@ class Commands(commands.Cog):
                 content = str(option.content).lower()
 
                 if (content == "higher" or content == "h") and hidden_number > given_number:
-                    await ctx.send(f":partying_face: {ctx.author.mention} You Won! ")
+                    WonEmbed = discord.Embed(
+                        colour = discord.Colour.light_gray()
+                    )
+                    WonEmbed.set_author(name = f"{ctx.author.name} You Won!")
+                    await ctx.send(embed = WonEmbed)
                     return
 
                 if (content == "lower" or content == "l") and hidden_number < given_number:
-                    await ctx.send(f":partying_face: {ctx.author.mention} You Won! ")
+                    WonEmbed = discord.Embed(
+                        colour = discord.Colour.light_gray()
+                    )
+                    WonEmbed.set_author(name = f"{ctx.author.name} You Won!")
+                    await ctx.send(embed = WonEmbed)
                     return
 
                 if hidden_number == given_number:
-                    await ctx.send("It was a tie")
-                    return
+                    TieEmbed = discord.Embed(
+                        colour = discord.Colour.light_gray()
+                    )
+                    TieEmbed.set_author(name = f"{ctx.author.name}, it was a tie")
+                    await ctx.send(embed = TieEmbed)
 
-                await ctx.send(f"{ctx.author.mention} You lost! :cry: ")
+                    return
+                
+                LostEmbed = discord.Embed(
+                    colour = discord.Colour.light_gray()
+                )
+                LostEmbed.set_author(name = f"{ctx.author.name} You lost :(")
+                await ctx.send(embed = LostEmbed)
+
                 return
 
-            await ctx.send(f"{ctx.author.mention} please provide a valid option - (higher or lower)")
+            ErrorEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            ErrorEmbed.set_author(name = f"{ctx.author.name} please provide a valid option - (higher or lower)")
+            await ctx.send(embed = ErrorEmbed)
 
         except asyncio.TimeoutError:
-            await ctx.send(f"{ctx.author.mention} Time Out!")
+            await ctx.send(f"{ctx.author.mention} Time out error!")
 
 
 def setup(client):
