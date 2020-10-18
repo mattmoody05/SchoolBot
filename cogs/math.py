@@ -1,4 +1,4 @@
-# function to get an embed
+# function to get an embed quickly
 def SimpleEmbed(author):
     Embed = discord.Embed(
         colour = discord.Colour.light_gray()
@@ -12,8 +12,6 @@ import discord
 
 # other imports 
 import math
-
-
 
 
 class Math(commands.Cog):
