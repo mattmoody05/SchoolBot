@@ -28,6 +28,12 @@ Theme : For Students
     - done
 13. Poll system (reactions and embeds could be used)
     - done
+14. Password Generator
+15. Number Guessing
+16. Dice Rolling
+    - done
+17. Rock paper Scissors
+    - done
 
 
 Matt's Current Work:

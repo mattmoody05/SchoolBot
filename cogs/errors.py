@@ -25,7 +25,7 @@ class Errors(commands.Cog):
             await ctx.send(f"{ctx.author.mention} Member Not Found!")
 
         else:
-            print(error)
+            raise error
 
 
 def setup(client):

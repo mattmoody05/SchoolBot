@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from .DataBase.client import DataBase
 
 
 class StudyMode(commands.Cog):
