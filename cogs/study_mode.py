@@ -1,5 +1,14 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour = discord.Colour.light_gray()
+    )
+    Embed.set_author(name = author)
+    return Embed
 
 
 class StudyMode(commands.Cog):
@@ -13,14 +22,18 @@ class StudyMode(commands.Cog):
         check = await self.client.db.check_study_mode(ctx.author.id)
         if not check:
             await self.client.db.insert_study_mode(ctx.author.id)
-            await ctx.send(f"{ctx.author.mention} Study Mode On!")
+            await ctx.send(ctx.author.mention)
+            await ctx.send(embed = SimpleEmbed("Study mode is now on"))
         else:
             if check[0][0]:
                 await self.client.db.change_study_mode(ctx.author.id, False)
-                await ctx.send(f"{ctx.author.mention} Study Mode Off!")
+                await ctx.send(ctx.author.mention)
+                await ctx.send(embed = SimpleEmbed("Study mode is now off"))
             else:
                 await self.client.db.change_study_mode(ctx.author.id, True)
-                await ctx.send(f"{ctx.author.mention} Study Mode On!")
+                await ctx.send(ctx.author.mention)
+                await ctx.send(embed = SimpleEmbed("Study mode is now on"))
+
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -31,10 +44,12 @@ class StudyMode(commands.Cog):
                 for author_id in record:
                     if message.author.id == author_id["user_id"]:
                         await message.delete()
-                        await message.channel.send(f"{message.author.mention} please go to Study!")
+                        await message.channel.send(message.author.mention)
+                        await message.send(embed = SimpleEmbed("Please go and study!"))
                     if author_id["user_id"] in mentions:
                         await message.delete()
-                        await message.channel.send(f"{message.author.mention} {self.client.get_user(author_id[0])} is studying please dont disturb him :)")
+                        await message.channel.send(message.author.metion)
+                        await message.channel.send(SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
 
 
 def setup(client):
