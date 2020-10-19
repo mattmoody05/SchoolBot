@@ -16,7 +16,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(kick_members=True)
     @commands.command()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
-        await ctx.send(f"{user.mention} has been banned for : {reason}")
+        await ctx.send(f"{user.mention} has been kicked for : {reason}")
         await user.kick(reason=reason)
 
     @commands.has_permissions(ban_members=True)

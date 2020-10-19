@@ -10,7 +10,7 @@ MainEmbed.set_author(name="Schoolbot Help")
 MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
-MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- other", inline=False)
+MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- other", inline=False)
 
 # other embed
 OtherEmbed = discord.Embed(
@@ -88,6 +88,17 @@ NSEmbed = discord.Embed(colour=discord.Colour.light_grey())
 NSEmbed.set_author(name="Schoolbot help - Notes Sharing")
 NSEmbed.add_field(name="Pasting with - <title> | <description>", value="Just paste the picture and it would be formatted into a well embed \n Note: The picture should be in a proper channel name e.g - #notes-sharing")
 
+# tag
+TEmbed = discord.Embed(color=discord.Colour.light_grey())
+TEmbed.set_author(name="Schoolbot help - Tag")
+TEmbed.add_field(name="tag create <name> <content>", value="Creates a tag with that name and content", inline=False)
+TEmbed.add_field(name="tag edit <name> <content>", value="Edits the tag with that name if you own that", inline=False)
+TEmbed.add_field(name="tag rename <old name> <new name>", value="Renames the tag with that name if you own it", inline=False)
+TEmbed.add_field(name="tag delete <name>", value="Deletes the tag with that name if you own it", inline=False)
+TEmbed.add_field(name="tag info <name>", value="Gives the info of a tag with that name", inline=False)
+TEmbed.add_field(name="tag list <member>", value="Lists all the tags of that member", inline=False)
+TEmbed.add_field(name="tag all", value="DM's all the tags", inline=False)
+
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -132,6 +143,10 @@ class Help(commands.Cog):
     @help.command(aliases=["ns"])
     async def notes_sharing(self, ctx):
         await ctx.send(embed=NSEmbed)
+
+    @help.command()
+    async def tag(self, ctx):
+        await ctx.send(embed=TEmbed)
 
 
 def setup(client):

@@ -71,3 +71,51 @@ class DataBase:
         query = """SELECT * FROM todo WHERE user_id=$1"""
         record = await self.pool.fetch(query, user_id)
         return record
+
+    async def insert_into_tag(self, user_id: int, name: str, text: str):
+        query = """INSERT INTO tag (user_id, name, text, uses) VALUES ($1, $2, $3, $4)"""
+        await self.pool.execute(query, user_id, name, text, 0)
+
+    async def update_uses_in_tag(self, name: str):
+        record = await self.select_from_tag(name)
+        numbers = int(record[0]["uses"])
+        numbers += 1
+        query = """UPDATE tag SET uses=$2 WHERE name=$1"""
+        await self.pool.execute(query, name, numbers)
+
+    async def select_from_tag(self, name: str):
+        query = """SELECT * FROM tag WHERE name=$1"""
+        record = await self.pool.fetch(query, name)
+        return record
+
+    async def select_user_tag(self, user_id: int, name: str):
+        query = """SELECT * FROM tag WHERE user_id=$1 AND name=$2"""
+        record = await self.pool.fetch(query, user_id, name)
+        return record
+
+    async def delete_from_tag(self, user_id: int, name: str):
+        query = """DELETE FROM tag WHERE user_id=$1 AND name=$2"""
+        await self.pool.execute(query, user_id, name)
+
+    async def rename_from_tag(self, user_id: int, name: str, new_name: str):
+        query = """UPDATE tag SET name=$3 WHERE user_id=$1 AND name=$2"""
+        await self.pool.execute(query, user_id, name, new_name)
+
+    async def edit_from_tag(self, user_id: int, name: str, content: str):
+        query = """UPDATE tag SET text=$3 WHERE user_id=$1 AND name=$2"""
+        await self.pool.execute(query, user_id, name, content)
+
+    async def select_all_from_tag(self):
+        query = """SELECT name FROM tag ORDER BY name"""
+        record = await self.pool.fetch(query)
+        return record
+
+    async def select_tag_of_member(self, user_id: int):
+        query = """SELECT name FROM tag WHERE user_id=$1 ORDER BY name"""
+        record = await self.pool.fetch(query, user_id)
+        return record
+
+    async def info_of_tag(self, name: str):
+        query = """SELECT * FROM tag WHERE name=$1"""
+        record = await self.pool.fetch(query, name)
+        return record

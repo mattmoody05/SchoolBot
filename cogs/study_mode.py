@@ -45,7 +45,7 @@ class StudyMode(commands.Cog):
                     if message.author.id == author_id["user_id"]:
                         await message.delete()
                         await message.channel.send(message.author.mention)
-                        await message.send(embed = SimpleEmbed("Please go and study!"))
+                        await message.channel.send(embed = SimpleEmbed("Please go and study!"))
                     if author_id["user_id"] in mentions:
                         await message.delete()
                         await message.channel.send(message.author.metion)
