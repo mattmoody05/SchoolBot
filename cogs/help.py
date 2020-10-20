@@ -10,7 +10,7 @@ MainEmbed.set_author(name="Schoolbot Help")
 MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
-MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- other", inline=False)
+MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- Translate\n- other", inline=False)
 
 # other embed
 OtherEmbed = discord.Embed(
@@ -23,6 +23,7 @@ OtherEmbed.add_field(name="suggest", value="Makes a yes no poll", inline=False)
 OtherEmbed.add_field(name='poll "description" "choice1" "choice2"', value="Makes a poll with multiple choices", inline=False)
 OtherEmbed.add_field(name='study_mode', value="Sets a study_mode for you, to help you concentrate on studies", inline=False)
 OtherEmbed.add_field(name='source <command>', value="Gives the source of a command", inline=False)
+OtherEmbed.add_field(name='password_generate <len of password>', value="Gives a random password of the specified length", inline=False)
 
 # wiki embed
 WikiEmbed = discord.Embed(
@@ -99,6 +100,13 @@ TEmbed.add_field(name="tag info <name>", value="Gives the info of a tag with tha
 TEmbed.add_field(name="tag list <member>", value="Lists all the tags of that member", inline=False)
 TEmbed.add_field(name="tag all", value="DM's all the tags", inline=False)
 
+# translate
+TSEmbed = discord.Embed(color=discord.Colour.light_grey())
+TSEmbed.set_author(name="Schoolbot help - Translator")
+TSEmbed.add_field(name="translate <language unicode> <text>", value="Translate the text in the language provided by you", inline=False)
+TSEmbed.add_field(name="translate detect <text>", value="Detects the language of the text that you have entered", inline=False)
+TSEmbed.add_field(name="translate all", value="Gives all the unicode of all the languages supported", inline=False)
+
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -147,6 +155,10 @@ class Help(commands.Cog):
     @help.command()
     async def tag(self, ctx):
         await ctx.send(embed=TEmbed)
+
+    @help.command()
+    async def translate(self, ctx):
+        await ctx.send(embed=TSEmbed)
 
 
 def setup(client):

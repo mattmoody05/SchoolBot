@@ -71,7 +71,10 @@ class ToDo(commands.Cog):
             pager.add_line(line)
 
         for page in pager.pages:
-            await ctx.author.send(page)
+            try:
+                await ctx.author.send(page)
+            except discord.Forbidden:
+                await ctx.send(f"{ctx.author.mention} cant DM you!")
 
 
 def setup(client):

@@ -12,6 +12,7 @@ Theme : For Students
     - funtionality done, adding comments 10/10/20
     - comments added, all complete
 4. Translate to any language
+    - done
 5. Time table management using DB
     - completed without embedding
 6. Timer (maybe with DB)
@@ -29,7 +30,9 @@ Theme : For Students
 13. Poll system (reactions and embeds could be used)
     - done
 14. Password Generator
+    - done
 15. Number Guessing
+    - done
 16. Dice Rolling
     - done
 17. Rock paper Scissors

@@ -15,8 +15,7 @@ BOTPREFIX = data['prefix']
 BOTTOKEN = data['token']
 
 # declaring the client object
-intents = discord.Intents.all()
-client = commands.AutoShardedBot(command_prefix=BOTPREFIX, intents=intents)
+client = commands.AutoShardedBot(command_prefix=BOTPREFIX, intents=discord.Intents.all())
 
 client.info = {
     "host": data["host"],

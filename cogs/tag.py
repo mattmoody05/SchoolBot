@@ -108,7 +108,8 @@ class Tag(commands.Cog):
         user_id = int(record[0]["user_id"])
         user = await self.client.fetch_user(user_id)
         uses = int(record[0]["uses"])
-        content = f"Name - {user}\nUses - {uses}"
+        content = f"```css" \
+                  f"\nName - {user}\nUses - {uses}```"
         await ctx.send(content)
 
 def setup(client):

@@ -29,6 +29,8 @@ MemberNotFoundEmbed = discord.Embed(
 )
 MemberNotFoundEmbed.set_author(name="Member not found!")
 
+Valueerror = discord.Embed(colour=discord.Colour.light_gray())
+Valueerror.set_author(name="Please Provide the correct data type")
 
 class Errors(commands.Cog):
     def __init__(self, client):
@@ -38,27 +40,21 @@ class Errors(commands.Cog):
     async def on_command_error(self, ctx, error):
 
         if isinstance(error, commands.errors.CommandNotFound):
-            await ctx.send(f"{ctx.author.mention}")
-            await ctx.send(embed=NoCommandFoundEmbed)
+            await ctx.send(content=f"{ctx.author.mention}", embed=NoCommandFoundEmbed)
 
         elif isinstance(error, commands.errors.MissingPermissions):
-            await ctx.send(f"{ctx.author.mention}")
-            await ctx.send(embed=UserPermissionsEmbed)
+            await ctx.send(content=f"{ctx.author.mention}", embed=UserPermissionsEmbed)
 
         elif isinstance(error, commands.errors.MissingRequiredArgument):
-            await ctx.send(f"{ctx.author.mention}")
-            await ctx.send(embed=ArgsErrorEmbed)
+            await ctx.send(content=f"{ctx.author.mention}", embed=ArgsErrorEmbed)
 
         elif isinstance(error, commands.errors.BotMissingPermissions):
-            await ctx.send(f"{ctx.author.mention}")
-            await ctx.send(embed=BotPermissionsEmbed)
+            await ctx.send(content=f"{ctx.author.mention}", embed=BotPermissionsEmbed)
 
         elif isinstance(error, commands.errors.MemberNotFound):
-            await ctx.send(f"{ctx.author.mention}")
-            await ctx.send(embed=MemberNotFoundEmbed)
+            await ctx.send(content=f"{ctx.author.mention}", embed=MemberNotFoundEmbed)
 
         else:
-            print(error)
             raise error
 
 
