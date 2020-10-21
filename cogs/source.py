@@ -21,20 +21,21 @@ class Source(commands.Cog):
 
     @commands.command()
     async def source(self, ctx, *, query: str):
-        cmd = self.client.get_command(query)
-        if cmd is None:
-            await ctx.send(content=ctx.author.mention, embed=SimpleEmbed("This command is not found"))
-            return
-        try:
-            source = inspect.getsource(cmd.callback)
-            pager = await self.pager(source)
+        async with ctx.channel.typing():
+            cmd = self.client.get_command(query)
+            if cmd is None:
+                await ctx.send(content=ctx.author.mention, embed=SimpleEmbed("This command is not found"))
+                return
+            try:
+                source = inspect.getsource(cmd.callback)
+                pager = await self.pager(source)
 
-            for page in pager.pages:
-                page = page.replace("```", "")
-                await ctx.send(f"```py{page}```")
-        except:
-            await ctx.send(embed=SimpleEmbed(f"{ctx.author.mention} This command is not found"))
-            return
+                for page in pager.pages:
+                    page = page.replace("```", "")
+                    await ctx.send(f"```py{page}```")
+            except:
+                await ctx.send(embed=SimpleEmbed(f"{ctx.author.mention} This command is not found"))
+                return
 
     async def pager(self, content):
         pager = commands.Paginator()

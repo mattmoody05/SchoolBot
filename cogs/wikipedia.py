@@ -15,58 +15,60 @@ class Wikipedia(commands.Cog):
 
     @wiki.command(aliases=["s"])
     async def summary(self, ctx, *, query: str):
-        ww = wikipediaapi.Wikipedia(language="en")
-        page = ww.page(query)
+        async with ctx.channel.typing():
+            ww = wikipediaapi.Wikipedia(language="en")
+            page = ww.page(query)
 
-        if page.exists():
-            title = page.title
-            summary = page.summary.split(".")
+            if page.exists():
+                title = page.title
+                summary = page.summary.split(".")
 
-            read_more = f"\n\nYou can read more about this here : {page.fullurl}"
+                read_more = f"\n\nYou can read more about this here : {page.fullurl}"
 
-            embed = discord.Embed()
-            embed.title = title
-            embed.description = ". ".join(summary[:10])
-            embed.description += read_more
-            embed.set_footer(text=f"Requested by - {ctx.author}")
+                embed = discord.Embed()
+                embed.title = title
+                embed.description = ". ".join(summary[:10])
+                embed.description += read_more
+                embed.set_footer(text=f"Requested by - {ctx.author}")
 
-            await ctx.send(embed=embed)
+                await ctx.send(embed=embed)
 
-        else:
-            await ctx.message.delete(delay=10)
-            await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)", delete_after=10)
+            else:
+                await ctx.message.delete(delay=10)
+                await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)", delete_after=10)
 
     @wiki.command(aliases=["f"])
     async def full(self, ctx, *, query: str):
-        ww = wikipediaapi.Wikipedia(language="en", extract_format=wikipediaapi.ExtractFormat.WIKI)
-        page = ww.page(query)
+        async with ctx.channel.typing():
+            ww = wikipediaapi.Wikipedia(language="en", extract_format=wikipediaapi.ExtractFormat.WIKI)
+            page = ww.page(query)
 
-        if page.exists():
-            title = page.title
-            content = page.text
+            if page.exists():
+                title = page.title
+                content = page.text
 
-            pager = commands.Paginator()
-            pager.add_line(line=f"Title : {title}")
-            pager.add_line(line=f"Full Text - ")
+                pager = commands.Paginator()
+                pager.add_line(line=f"Title : {title}")
+                pager.add_line(line=f"Full Text - ")
 
-            for line in content.splitlines(keepends=True):
-                if len(line) < 1992:
-                    pager.add_line(line)
-                else:
-                    lines = line.split(".")
-                    for sl in lines:
-                        pager.add_line(sl)
+                for line in content.splitlines(keepends=True):
+                    if len(line) < 1992:
+                        pager.add_line(line)
+                    else:
+                        lines = line.split(".")
+                        for sl in lines:
+                            pager.add_line(sl)
 
-            for page in pager.pages:
-                try:
-                    await ctx.author.send(page)
-                except discord.Forbidden:
-                    await ctx.message.delete(delay=10)
-                    await ctx.send(f"{ctx.author.mention} Could not DM you :)", delete_after=10)
-                    break
+                for page in pager.pages:
+                    try:
+                        await ctx.author.send(page)
+                    except discord.Forbidden:
+                        await ctx.message.delete(delay=10)
+                        await ctx.send(f"{ctx.author.mention} Could not DM you :)", delete_after=10)
+                        break
 
-        else:
-            await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)")
+            else:
+                await ctx.send(f"{ctx.author.mention} please specify a valid Wikipedia Page :)")
 
 
 def setup(client):

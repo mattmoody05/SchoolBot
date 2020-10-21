@@ -29,45 +29,47 @@ class Poll(commands.Cog):
 
     @commands.command()
     async def suggest(self, ctx, *, text: str):
-        await ctx.message.delete()
-        suggest_embed = discord.Embed(
-            color=discord.Colour.light_grey()
-        )
-        suggest_embed.set_author(name=f"Poll by {ctx.author}", icon_url=ctx.author.avatar_url)
-        suggest_embed.description = text
-        message = await ctx.send(embed=suggest_embed)
-        await message.add_reaction("👍")
-        await message.add_reaction("👎")
+        async with ctx.channel.typing():
+            await ctx.message.delete()
+            suggest_embed = discord.Embed(
+                color=discord.Colour.light_grey()
+            )
+            suggest_embed.set_author(name=f"Poll by {ctx.author}", icon_url=ctx.author.avatar_url)
+            suggest_embed.description = text
+            message = await ctx.send(embed=suggest_embed)
+            await message.add_reaction("👍")
+            await message.add_reaction("👎")
 
     @commands.command()
     async def poll(self, ctx, text: str, *options):
-        numbers = self.numbers
-        if len(options) < 2:
-            await ctx.message.delete()
-            await ctx.send(ctx.author.mention, delete_after=10)
-            await ctx.send(embed = SimpleEmbed("Please provide 2 or more options for the poll"), delete_after=10)
-            return
-        if len(options) > 10:
-            await ctx.message.delete()
-            await ctx.send(ctx.author.mention, delete_after=10)
-            await ctx.send(SimpleEmbed("You cant make a poll with more than 10 options"), delete_after=10)
-            return
-        poll_embed = discord.Embed(
-            color=discord.Colour.light_grey()
-        )
-        poll_embed.title = text
+        async with ctx.channel.typing():
+            numbers = self.numbers
+            if len(options) < 2:
+                await ctx.message.delete()
+                await ctx.send(ctx.author.mention, delete_after=10)
+                await ctx.send(embed = SimpleEmbed("Please provide 2 or more options for the poll"), delete_after=10)
+                return
+            if len(options) > 10:
+                await ctx.message.delete()
+                await ctx.send(ctx.author.mention, delete_after=10)
+                await ctx.send(SimpleEmbed("You cant make a poll with more than 10 options"), delete_after=10)
+                return
+            poll_embed = discord.Embed(
+                color=discord.Colour.light_grey()
+            )
+            poll_embed.title = text
 
-        description = """"""
-        for option in range(len(options)):
-            description += f"\n{numbers[option + 1]} {options[option]}\n"
+            description = """"""
+            for option in range(len(options)):
+                description += f"\n{numbers[option + 1]} {options[option]}\n"
 
-        poll_embed.description = description
+            poll_embed.description = description
 
-        poll_embed.set_footer(text=f"Poll by - {ctx.author}")
-        msg = await ctx.send(embed=poll_embed)
+            poll_embed.set_footer(text=f"Poll by - {ctx.author}")
+            msg = await ctx.send(embed=poll_embed)
 
-        for option in range(len(options)):
-            await msg.add_reaction(numbers[option + 1])
+            for option in range(len(options)):
+                await msg.add_reaction(numbers[option + 1])
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):

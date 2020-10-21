@@ -38,7 +38,6 @@ class Errors(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-
         if isinstance(error, commands.errors.CommandNotFound):
             await ctx.send(content=f"{ctx.author.mention}", embed=NoCommandFoundEmbed)
 

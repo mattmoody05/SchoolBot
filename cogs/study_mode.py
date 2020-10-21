@@ -18,22 +18,23 @@ class StudyMode(commands.Cog):
 
     @commands.command(aliases=["sm"])
     async def study_mode(self, ctx):
-        if ctx.author.bot:
-            return
-        check = await self.client.db.check_study_mode(ctx.author.id)
-        if not check:
-            await self.client.db.insert_study_mode(ctx.author.id)
-            await ctx.send(ctx.author.mention)
-            await ctx.send(embed=SimpleEmbed("Study mode is now on"))
-        else:
-            if check[0][0]:
-                await self.client.db.change_study_mode(ctx.author.id, False)
-                await ctx.send(ctx.author.mention)
-                await ctx.send(embed=SimpleEmbed("Study mode is now off"))
-            else:
-                await self.client.db.change_study_mode(ctx.author.id, True)
+        async with ctx.channel.typing():
+            if ctx.author.bot:
+                return
+            check = await self.client.db.check_study_mode(ctx.author.id)
+            if not check:
+                await self.client.db.insert_study_mode(ctx.author.id)
                 await ctx.send(ctx.author.mention)
                 await ctx.send(embed=SimpleEmbed("Study mode is now on"))
+            else:
+                if check[0][0]:
+                    await self.client.db.change_study_mode(ctx.author.id, False)
+                    await ctx.send(ctx.author.mention)
+                    await ctx.send(embed=SimpleEmbed("Study mode is now off"))
+                else:
+                    await self.client.db.change_study_mode(ctx.author.id, True)
+                    await ctx.send(ctx.author.mention)
+                    await ctx.send(embed=SimpleEmbed("Study mode is now on"))
 
     @commands.Cog.listener()
     async def on_message(self, message):
