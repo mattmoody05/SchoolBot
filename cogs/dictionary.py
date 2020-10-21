@@ -1,9 +1,9 @@
 # discord imports
+import aiohttp
 import discord
-from discord.ext import commands
-
 # dictionary imports
 from PyDictionary import PyDictionary
+from discord.ext import commands
 
 
 class dictionary(commands.Cog):
@@ -19,36 +19,37 @@ class dictionary(commands.Cog):
         TaskErrorEmbed.set_author(name="Please specify a dict task!", delete_after=10)
         await ctx.send(embed=TaskErrorEmbed)
 
-
     # definitions
     @dict.command(aliases=["def"])
-    async def define(self, ctx, arg):
-        Definition = PyDictionary().meaning(arg)  # getting the defintion using PyDictionary
+    async def define(self, ctx, *, arg: str):
+        word = await commands.clean_content().convert(ctx=ctx, argument=arg)
 
-        # creating the embed that the defintions will be delivered in
-        DefinitionEmbed = discord.Embed(
-            colour=discord.Colour.light_gray()
-        )
-        DefinitionEmbed.set_author(name='Definition of "{}"'.format(arg))
+        url = f"https://api.urbandictionary.com/v0/define?term={word}"
 
-        try:
-            # adding the definitions to the embed
-            for i in range(len(Definition)):
-                CurrentDef = str(Definition[list(Definition)[i]]).replace("[", "").replace("]", "")
-                DefinitionEmbed.add_field(name=list(Definition)[i], value=CurrentDef, inline=False)
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                json = await response.json()
 
-            # sending the embed
-            await ctx.send(embed=DefinitionEmbed)
-        except TypeError:
-            await ctx.message.delete()
-            NoMeaningEmbed = discord.Embed(
-                colour = discord.Colour.light_gray()
-            )
-            NoMeaningEmbed.set_author(name = "We could not find a meaning for this word.")
-            await ctx.send(embed = NoMeaningEmbed, delete_after=10)
-        except:
-            raise
+        if not json:
+            await ctx.send("Oh no! Our sources are down ATM, Please try again :)")
+            return
 
+        if not len(json["list"]):
+            await ctx.send(f"{ctx.author.mention} cant find that word in the dictionary")
+            return
+
+        data = json["list"][0]
+
+        meaning = discord.Embed(colour=discord.Colour.light_gray())
+
+        meaning.set_author(name=f"Definition of {data['word']}")
+        meaning.description = f"\n {data['definition']} \n"
+        meaning.description += f"\n **Example** \n {data['example']} \n"
+        meaning.description += f"\n You can read more here at - {data['permalink']} \n"
+        meaning.description += f"\n 👍 - {data['thumbs_up']} \n"
+        meaning.description += f"\n 👎 - {data['thumbs_down']} \n"
+        meaning.set_footer(text=f"Requested by - {ctx.author}")
+        await ctx.send(embed=meaning)
 
     # synonyms
     @dict.command(aliases=["syn"])

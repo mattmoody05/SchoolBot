@@ -3,3 +3,4 @@ PyDictionary
 Wikipedia-API
 youtube-search
 asyncpg
+aiohttp
