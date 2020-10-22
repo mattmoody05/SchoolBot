@@ -1,6 +1,7 @@
 # discord imports
 import aiohttp
 import discord
+
 # dictionary imports
 from PyDictionary import PyDictionary
 from discord.ext import commands

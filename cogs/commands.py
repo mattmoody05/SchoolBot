@@ -5,6 +5,7 @@ from discord.ext import commands
 # other imports
 import asyncio
 import random
+from datetime import datetime
 
 
 class Commands(commands.Cog):
@@ -232,8 +233,19 @@ class Commands(commands.Cog):
                     dnd += 1
                 elif member.status == discord.Status.offline:
                     offline += 1
-            content = f"Online - {online}\nIdle - {idle}\nDND - {dnd}\nOffline - {offline}\nOn Mobile - {on_mobile}\nTotal - {total}"
-            await ctx.send(content)
+
+            OnlineMembersEmbed = discord.Embed(
+                colour = discord.Colour.light_gray()
+            )
+            OnlineMembersEmbed.set_author(name = "Member counts")
+            OnlineMembersEmbed.add_field(name = "Online", value = online)
+            OnlineMembersEmbed.add_field(name = "Idle", value = idle)
+            OnlineMembersEmbed.add_field(name = "Offline", value = offline)
+            OnlineMembersEmbed.add_field(name = "Do not disturb", value = dnd)
+            OnlineMembersEmbed.add_field(name = "Total", value = total)
+            OnlineMembersEmbed.set_footer(text = f"Member count correct at: {str(datetime.now().time())[:8]}")
+            await ctx.send(embed = OnlineMembersEmbed)
+
 
     @commands.has_permissions(administrator=True)
     @commands.command()

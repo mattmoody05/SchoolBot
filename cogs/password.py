@@ -1,7 +1,19 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports 
 import string
 import random
+
+# embeds
+PrivacyEmbed = discord.Embed(
+    colour = discord.Colour.light_gray()
+)
+PrivacyEmbed.set_author(name = "Password Privacy")
+PrivacyEmbed.add_field(name = "How we generate passwords?", value = "We generate the passwords by picking random numbers, letters and symbols and then combining them into a password.", inline = False)
+PrivacyEmbed.add_field(name = "Do you store passwords?", value = "No, we will never store your password. The password will only be sent to you and once it has been generated and sent, the only person who can access you password is you.", inline = False)
+PrivacyEmbed.add_field(name = "Can I check the source code?", value = "Yes! The source code can be viewed by running `$source password_generate`", inline = False)
 
 
 class Password(commands.Cog):
@@ -29,9 +41,14 @@ class Password(commands.Cog):
             password = "".join(random.choice(mega_list)for char in range(password_len))
 
             try:
+                await ctx.author.send(embed = PrivacyEmbed)
                 await ctx.author.send(f"```{password}```")
             except discord.Forbidden:
-                await ctx.send(f"Cant DM you")
+                DMErrorEmbed = discord.Embed(
+                    colour = discord.Colour.light_grey()
+                )
+                DMErrorEmbed.set_author("We cannot DM you, please check your privacy settings")
+                await ctx.send(embed = DMErrorEmbed)
 
 
 def setup(client):
