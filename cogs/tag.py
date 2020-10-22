@@ -77,6 +77,10 @@ class Tag(commands.Cog):
         async with ctx.channel.typing():
             records = await self.client.db.select_all_from_tag()
 
+            if not records:
+                await ctx.send("There are no tags yet!")
+                return
+
             pager = commands.Paginator()
 
             for record in records:

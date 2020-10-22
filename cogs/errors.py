@@ -32,6 +32,10 @@ MemberNotFoundEmbed.set_author(name="Member not found!")
 Valueerror = discord.Embed(colour=discord.Colour.light_gray())
 Valueerror.set_author(name="Please Provide the correct data type")
 
+ForbiddenError = discord.Embed(colour=discord.Colour.light_gray())
+ForbiddenError.set_author(name="404 Forbidden Error!")
+
+
 class Errors(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -52,6 +56,9 @@ class Errors(commands.Cog):
 
         elif isinstance(error, commands.errors.MemberNotFound):
             await ctx.send(content=f"{ctx.author.mention}", embed=MemberNotFoundEmbed)
+
+        elif isinstance(error, discord.errors.Forbidden):
+            await ctx.send(content=f"{ctx.author.mention}", embed=ForbiddenError)
 
         else:
             raise error

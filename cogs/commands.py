@@ -101,7 +101,7 @@ class Commands(commands.Cog):
                 WonEmbed = discord.Embed(
                     colour=discord.Colour.light_gray()
                 )
-                WonEmbed.set_author(name="{0}, You won! The option was {1}".format(ctx.author.name, opponent))
+                WonEmbed.set_author(name="{0}, It was a tie! The option was {1}".format(ctx.author.name, opponent))
                 await ctx.send(embed=WonEmbed)
                 return
             if option == "paper" and opponent == "stone":
@@ -234,6 +234,36 @@ class Commands(commands.Cog):
                     offline += 1
             content = f"Online - {online}\nIdle - {idle}\nDND - {dnd}\nOffline - {offline}\nOn Mobile - {on_mobile}\nTotal - {total}"
             await ctx.send(content)
+
+    @commands.has_permissions(administrator=True)
+    @commands.command()
+    async def announcement(self, ctx, topic: str, *, text):
+        try:
+            for channel in ctx.guild.channels:
+                if channel.name.lower().count("announcement") > 0:
+                    await ctx.message.delete()
+                    announcement = discord.Embed(colour=discord.Colour.light_grey())
+                    announcement.set_author(name=topic, icon_url=ctx.author.avatar_url)
+                    announcement.description = text
+                    announcement.set_footer(text=f"Announcement By - {ctx.author}")
+                    await channel.send(content=ctx.guild.default_role, embed=announcement)
+                    return
+            else:
+                await ctx.message.delete()
+                overwrites = {
+                    ctx.guild.default_role: discord.PermissionOverwrite(send_messages=False),
+                }
+                channel = await ctx.guild.create_text_channel(name="Announcement",
+                                                              topic="This Channel is for servers Announcements",
+                                                              overwrites=overwrites)
+                announcement = discord.Embed(colour=discord.Colour.light_grey())
+                announcement.set_author(name=topic, icon_url=ctx.author.avatar_url)
+                announcement.description = text
+                announcement.set_footer(text=f"Announcement By - {ctx.author}")
+                await channel.send(content=ctx.guild.default_role, embed=announcement)
+                return
+        except discord.Forbidden:
+            await ctx.send(f"{ctx.author.mention} I dont have permissions to do this!")
 
 
 def setup(client):

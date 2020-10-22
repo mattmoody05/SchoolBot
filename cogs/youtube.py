@@ -32,7 +32,7 @@ class Youtube(commands.Cog):
             SearchEmbed.set_image(url=resultsjson['videos'][0]['thumbnails'][0])
 
             await ctx.send(embed=SearchEmbed)
-
+            return
 
 def setup(client):
     client.add_cog(Youtube(client))

@@ -1,0 +1,32 @@
+2020-10-23 00:50:16.112  INFO 5872 --- [XNIO-1 task-17] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58636
+2020-10-23 00:50:16.124  INFO 5872 --- [XNIO-1 task-17] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58636
+2020-10-23 00:50:16.128  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "configureResuming", "key": "default-node", "timeout": 60}
+2020-10-23 00:55:20.496  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58636 with status CloseStatus[code=1006, reason=] -- Session can be resumed within the next 60 seconds with key default-node
+2020-10-23 00:55:25.683  INFO 5872 --- [XNIO-1 task-18] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58678
+2020-10-23 00:55:25.690  INFO 5872 --- [XNIO-1 task-18] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58678
+2020-10-23 00:55:25.691  INFO 5872 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "configureResuming", "key": "default-node", "timeout": 60}
+2020-10-23 00:55:32.074  INFO 5872 --- [XNIO-1 task-19] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-10-23 00:55:32.607  WARN 5872 --- [lava-daemon-pool-info-loader-2-thread-1] c.s.d.l.s.youtube.YoutubeSearchProvider  : Failed to match ytInitialData JSON object
+2020-10-23 00:55:32.608  INFO 5872 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2020-10-23 00:56:20.512  INFO 5872 --- [pool-9-thread-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2020-10-23 00:56:33.806  INFO 5872 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-10-23 00:56:34.211  INFO 5872 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "764154090221207612", "sessionId": "e599d9ce8ff79d83a60f824563f21107", "event": {"token": "561edfadca036152", "guild_id": "764154090221207612", "endpoint": "eu-central775.discord.media:443"}}
+2020-10-23 00:56:35.138  INFO 5872 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist POP Music Playlist 2020
+2020-10-23 00:56:35.648  INFO 5872 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "764154090221207612", "track": "QAAAhgIAJE1hcm9vbiA1IC0gTWVtb3JpZXMgKE9mZmljaWFsIFZpZGVvKQAITWFyb29uIDUAAAAAAAL9oAALU2xQaE1QblE1OGsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1TbFBoTVBuUTU4awAHeW91dHViZQAAAAAAAAAA"}
+2020-10-23 00:57:20.231  INFO 5872 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58678 with status CloseStatus[code=1006, reason=] -- Session can be resumed within the next 60 seconds with key default-node
+2020-10-23 00:57:25.251  INFO 5872 --- [XNIO-1 task-23] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:58700
+2020-10-23 00:57:25.257  INFO 5872 --- [XNIO-1 task-23] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:58700
+2020-10-23 00:57:25.259  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "configureResuming", "key": "default-node", "timeout": 60}
+2020-10-23 00:57:28.916  INFO 5872 --- [XNIO-1 task-24] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-10-23 00:57:29.328  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "764154090221207612", "sessionId": "635617904603f88f54b123faf345f546", "event": {"token": "561edfadca036152", "guild_id": "764154090221207612", "endpoint": "eu-central775.discord.media:443"}}
+2020-10-23 00:57:30.324  INFO 5872 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist POP Music Playlist 2020
+2020-10-23 00:57:30.714  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "764154090221207612", "track": "QAAAhgIAJE1hcm9vbiA1IC0gTWVtb3JpZXMgKE9mZmljaWFsIFZpZGVvKQAITWFyb29uIDUAAAAAAAL9oAALU2xQaE1QblE1OGsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1TbFBoTVBuUTU4awAHeW91dHViZQAAAAAAAAAA"}
+2020-10-23 00:57:46.083  INFO 5872 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : GET /loadtracks
+2020-10-23 00:57:46.403  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "764154090221207612", "sessionId": "635617904603f88f54b123faf345f546", "event": {"token": "561edfadca036152", "guild_id": "764154090221207612", "endpoint": "eu-central775.discord.media:443"}}
+2020-10-23 00:57:46.404  INFO 5872 --- [parallel-3] space.npstr.magma.impl.AudioStack        : Discarding received connection request because it is identical to the already existing connection. If you really want to reconnect, send a disconnect request first.
+2020-10-23 00:57:47.356  INFO 5872 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist POP Music Playlist 2020
+2020-10-23 00:58:20.235  INFO 5872 --- [pool-10-thread-1] lavalink.server.io.SocketContext         : Shutting down 1 playing players.
+2020-10-23 00:58:32.016  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "764154090221207612"}
+2020-10-23 00:58:32.304  INFO 5872 --- [parallel-1] s.n.m.impl.connections.AudioWebSocket    : Websocket to wss://eu-central775.discord.media:443/?v=4 closed with code 4014 and reason Disconnected.
+2020-10-23 00:58:32.305  INFO 5872 --- [parallel-1] s.n.m.impl.connections.AudioWebSocket    : Closing
+2020-10-23 00:58:56.425  INFO 5872 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:58700 with status CloseStatus[code=1006, reason=] -- Session can be resumed within the next 60 seconds with key default-node
