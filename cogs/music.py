@@ -24,12 +24,9 @@ class Music(commands.Cog):
     async def cog_before_invoke(self, ctx):
         """ Command before-invoke handler. """
         guild_check = ctx.guild is not None
-        #  This is essentially the same as `@commands.guild_only()`
-        #  except it saves us repeating ourselves (and also a few lines).
 
         if guild_check:
             await self.ensure_voice(ctx)
-            #  Ensure that the client and command author share a mutual voicechannel.
 
         return guild_check
 
@@ -44,7 +41,7 @@ class Music(commands.Cog):
 
         if not player.is_connected:
             if not should_connect:
-                return await ctx.send('Not connected.')
+                return await ctx.send(f"{ctx.author.mention} Im not Connected!")
 
             permissions = ctx.author.voice.channel.permissions_for(ctx.me)
 
@@ -75,15 +72,13 @@ class Music(commands.Cog):
         query = query.strip("<>")
 
         if not url_rx.match(query):
-            query = f"ytsearch:{query}"
+            query = f"ytsearch{query}"
 
         results = await player.node.get_tracks(query)
 
-        if not results or not results["tracks"]:
-            return await ctx.send(f"{ctx.author.mention} nothing Found!")
+        print(results)
 
         if results["loadType"] == "PLAYLIST_LOADED":
-            print(results)
 
             tracks = results["tracks"]
 
@@ -113,6 +108,9 @@ class Music(commands.Cog):
 
             await ctx.send(embed=single_url)
 
+        elif results["loadType"] == "NO_MATCHES":
+            await ctx.send(f"{ctx.author.mention} no results found!")
+
         if not player.is_playing:
             await player.play()
 
@@ -131,6 +129,46 @@ class Music(commands.Cog):
         await player.stop()
         await self.connect_to(ctx.guild.id, None)
         await ctx.send(f"{ctx.author.mention} Disconnected Successfully!")
+
+    @commands.command()
+    async def queue(self, ctx):
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+        queue = player.queue
+
+        if not queue:
+            return await ctx.send(f"{ctx.author.mention} No songs are in Queue!")
+
+        async with ctx.channel.typing():
+            pager = commands.Paginator()
+
+            for song in queue:
+                pager.add_line(song.title)
+
+            for page in pager.pages:
+                await ctx.send(page)
+            return
+
+    @commands.command()
+    async def current(self, ctx):
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+        current = player.current
+
+        if not current:
+            return await ctx.send(f"{ctx.author.mention} Nothing is currently Playing!")
+
+        async with ctx.channel.typing():
+            current_embed = discord.Embed(color=discord.Color.light_grey())
+            current_embed.set_author(name="Current Song")
+            current_embed.description = current.title
+            current_embed.set_footer(text=f"Requested by - {ctx.author}")
+            return await ctx.send(embed=current_embed)
+
+    @commands.command()
+    async def skip(self, ctx):
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+
+        await player.skip()
+        await ctx.send(f"{ctx.author.mention} If there are no songs in the queue then the bot will quit")
 
 
 def setup(client):
