@@ -3,8 +3,18 @@ import json
 import os
 from cogs.DataBase.client import DataBase
 
+# discord imports
 import discord
 from discord.ext import commands
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour = discord.Colour.light_gray()
+    )
+    Embed.set_author(name = author)
+    return Embed
+
 
 # opening config.json file
 with open('./config.json') as x:
@@ -54,14 +64,14 @@ async def on_ready():
 @commands.has_guild_permissions(administrator=True)
 @client.command()
 async def reload(ctx):
-    await ctx.send("***Reloading cogs...***")
+    await ctx.send(embed = SimpleEmbed("Reloading cogs..."), delete_after = 1)
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             client.unload_extension(f'cogs.{filename[:-3]}')
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             client.load_extension(f'cogs.{filename[:-3]}')
-    await ctx.send("Cogs reloaded")
+    await ctx.send(embed = SimpleEmbed("Cogs reloaded"), delete_after = 10)
 
 
 client.run(BOTTOKEN)
