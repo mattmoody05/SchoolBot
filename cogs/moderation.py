@@ -16,13 +16,20 @@ class Moderation(commands.Cog):
     @commands.has_permissions(kick_members=True)
     @commands.command()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
-        await ctx.send(f"{user.mention} has been kicked for : {reason}")
+        KickedEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        KickedEmbed.set_author(name = f"{user.display_name} has been kicked for : {reason}")
+        await ctx.send(embed = KickedEmbed)
         await user.kick(reason=reason)
 
     @commands.has_permissions(ban_members=True)
     @commands.command()
     async def ban(self, ctx, user: discord.Member, *, reason: str = None):
-        await ctx.send(f"{user.mention} has been banned for : {reason}")
+        BannedEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        BannedEmbed.set_author(name = f"{user.display_name} has been banned for : {reason}")
         await user.ban(reason=reason)
 
 

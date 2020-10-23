@@ -1,7 +1,7 @@
-# discord imports
 # other imports
 import inspect
 
+# discord imports
 import discord
 from discord.ext import commands
 
@@ -34,7 +34,7 @@ class Source(commands.Cog):
                     page = page.replace("```", "")
                     await ctx.send(f"```py{page}```")
             except:
-                await ctx.send(embed=SimpleEmbed(f"{ctx.author.mention} This command is not found"))
+                await ctx.send(embed=SimpleEmbed(f"{ctx.author.name} This command is not found"))
                 return
 
     async def pager(self, content):
