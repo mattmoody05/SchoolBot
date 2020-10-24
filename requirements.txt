@@ -4,3 +4,4 @@ Wikipedia-API
 youtube-search
 asyncpg
 aiohttp
+CurrencyConverter

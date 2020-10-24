@@ -10,7 +10,7 @@ MainEmbed.set_author(name="Schoolbot Help")
 MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
-MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- Translate\n- other", inline=False)
+MainEmbed.add_field(name="Areas of help", value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- translate\n- currency\n- other", inline=False)
 
 # other embed
 OtherEmbed = discord.Embed(
@@ -107,6 +107,15 @@ TSEmbed.add_field(name="translate <language unicode> <text>", value="Translate t
 TSEmbed.add_field(name="translate detect <text>", value="Detects the language of the text that you have entered", inline=False)
 TSEmbed.add_field(name="translate all", value="Gives all the unicode of all the languages supported", inline=False)
 
+# currency embed
+CurrencyEmbed = discord.Embed(
+    colour = discord.Colour.light_gray()
+)
+CurrencyEmbed.set_author(name = "Schoolbot help - Currency")
+CurrencyEmbed.add_field(name = "currency convert <amount> <input currency> <output currency>", value = "Converts the amount specified from the input currency specified to the output currency specified", inline = False)
+CurrencyEmbed.add_field(name = "currency value <currency>", value = "Show the value of the input currency in USD", inline = False)
+CurrencyEmbed.add_field(name = "currency list", value = "Shows a list of all the currencies supported by the converter", inline = False)
+
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -159,6 +168,10 @@ class Help(commands.Cog):
     @help.command()
     async def translate(self, ctx):
         await ctx.send(embed=TSEmbed)
+
+    @help.command()
+    async def currency(self, ctx):
+        await ctx.send(embed = CurrencyEmbed)
 
 
 def setup(client):
