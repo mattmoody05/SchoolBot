@@ -124,5 +124,6 @@ class Tag(commands.Cog):
                       f"\nName - {user}\nUses - {uses}```"
             await ctx.send(content)
 
+
 def setup(client):
     client.add_cog(Tag(client))

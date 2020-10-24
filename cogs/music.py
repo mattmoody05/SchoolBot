@@ -72,11 +72,9 @@ class Music(commands.Cog):
         query = query.strip("<>")
 
         if not url_rx.match(query):
-            query = f"ytsearch{query}"
+            query = f"ytsearch:{query}"
 
         results = await player.node.get_tracks(query)
-
-        print(results)
 
         if results["loadType"] == "PLAYLIST_LOADED":
 
@@ -169,6 +167,37 @@ class Music(commands.Cog):
 
         await player.skip()
         await ctx.send(f"{ctx.author.mention} If there are no songs in the queue then the bot will quit")
+
+    @commands.command()
+    async def pause(self, ctx):
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+        state = player.paused
+
+        if state:
+            return await ctx.send(f"{ctx.author.mention} Player is already paused!")
+
+        await player.set_pause(pause=True)
+
+    @commands.command()
+    async def resume(self, ctx):
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+        state = player.paused
+
+        if not state:
+            return await ctx.send(f"{ctx.author.mention} player is already resumed!")
+
+        await player.set_pause(pause=False)
+
+    @commands.command()
+    async def volume(self, ctx, vol: int):
+        if vol > 9999:
+            return await ctx.send(f"{ctx.author.mention} please specify a volume lower than this")
+
+        player = self.client.lavalink.player_manager.get(ctx.guild.id)
+        volume = player.volume
+
+        await player.set_volume(vol=vol)
+        await ctx.send(f"{ctx.author.mention} Volume changed from {volume} to {vol}")
 
 
 def setup(client):
