@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import lavalink
 import re
+import aiohttp
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
 
@@ -72,7 +73,18 @@ class Music(commands.Cog):
         query = query.strip("<>")
 
         if not url_rx.match(query):
-            query = f"ytsearch:{query}"
+            url = f"https://www.youtube.com/results?search_query={query}"
+
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as response:
+                    html = await response.text()
+
+            pattern = r"\watch\?v=(\S{11})"
+            fetch = re.findall(pattern, html)
+
+            video_url = f"https://www.youtube.com/watch?v={fetch[0]}"
+
+            return await self.play(ctx=ctx, query=video_url)
 
         results = await player.node.get_tracks(query)
 
