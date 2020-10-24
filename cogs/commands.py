@@ -277,6 +277,45 @@ class Commands(commands.Cog):
         except discord.Forbidden:
             await ctx.send(f"{ctx.author.mention} I dont have permissions to do this!")
 
+    @commands.command()
+    async def roman(self, ctx, num: int):
+        if num >= 4000:
+            return await ctx.send(f"{ctx.author.mention} please specify a number lower or equal to 3999!")
+        val = [
+            1000, 900, 500, 400,
+            100, 90, 50, 40,
+            10, 9, 5, 4,
+            1
+        ]
+        syb = [
+            "M", "CM", "D", "CD",
+            "C", "XC", "L", "XL",
+            "X", "IX", "V", "IV",
+            "I"
+        ]
+        roman_num = ''
+        i = 0
+        while num > 0:
+            for _ in range(num // val[i]):
+                roman_num += syb[i]
+                num -= val[i]
+            i += 1
+        await ctx.send(roman_num)
+
+    @commands.command()
+    async def bmi(self, ctx, weight: int, height: int):
+        """formula -  weight (kg) / [height (m)] * [height (m)]
+            Less than 15 	Very severely underweight
+            Between 15 and 16 	Severely underweight
+            Between 16 and 18.5 	Underweight
+            Between 18.5 and 25 	Normal (healthy weight)
+            Between 25 and 30 	Overweight
+            Between 30 and 35 	Moderately obese
+            Between 35 and 40 	Severely obese
+            Over 40 	Very severely obese
+        """
+        pass
+
 
 def setup(client):
     client.add_cog(Commands(client))
