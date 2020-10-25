@@ -19,6 +19,7 @@ class NotesSharing(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        """ Makes a markdown for the image uploaded on a specific channel name starting with `note` """
         if not message.guild:
             return
         if not message.channel.name.lower().count("note") > 0:

@@ -11,6 +11,7 @@ class Youtube(commands.Cog):
 
     @commands.command(aliases=["yt"])
     async def youtube(self, ctx, *args):
+        """ Gets the details and url for a yt video as per the query """
         async with ctx.channel.typing():
             query = ""
             for i in range(len(args)):
@@ -33,6 +34,7 @@ class Youtube(commands.Cog):
 
             await ctx.send(embed=SearchEmbed)
             return
+
 
 def setup(client):
     client.add_cog(Youtube(client))

@@ -18,6 +18,7 @@ class StudyMode(commands.Cog):
 
     @commands.command(aliases=["sm"])
     async def study_mode(self, ctx):
+        """ Sets the study mode on or off """
         async with ctx.channel.typing():
             if ctx.author.bot:
                 return
@@ -38,6 +39,7 @@ class StudyMode(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        """ Checks that if the person who sends the message in study_mode or the person mentioned in the message in study_mode """
         if not message.author.bot and message.content.count("$study_mode") < 1:
             record = await self.client.db.fetch_all_study_modes()
             if record:

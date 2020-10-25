@@ -15,6 +15,7 @@ class Wikipedia(commands.Cog):
 
     @wiki.command(aliases=["s"])
     async def summary(self, ctx, *, query: str):
+        """ Gets the summary of a topic from Wikipedia """
         async with ctx.channel.typing():
             ww = wikipediaapi.Wikipedia(language="en")
             page = ww.page(query)
@@ -39,6 +40,7 @@ class Wikipedia(commands.Cog):
 
     @wiki.command(aliases=["f"])
     async def full(self, ctx, *, query: str):
+        """ Gets the full article on a topic from wikipedia """
         async with ctx.channel.typing():
             ww = wikipediaapi.Wikipedia(language="en", extract_format=wikipediaapi.ExtractFormat.WIKI)
             page = ww.page(query)

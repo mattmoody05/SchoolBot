@@ -9,6 +9,7 @@ class Translation(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     async def translate(self, ctx, lang: str = None, *, text: str = None):
+        """ Translates the text into specified language """
         async with ctx.channel.typing():
             if lang is not None and text is not None:
                 language = await commands.clean_content().convert(ctx=ctx, argument=lang)
@@ -29,6 +30,7 @@ class Translation(commands.Cog):
 
     @translate.command()
     async def all(self, ctx):
+        """ Gives the list of all the languages supported by the translator """
         async with ctx.channel.typing():
             all_languages = googletrans.LANGUAGES
 
@@ -42,6 +44,7 @@ class Translation(commands.Cog):
 
     @translate.command()
     async def detect(self, ctx, *, text: str):
+        """ Detects the name of the language of the text """
         async with ctx.channel.typing():
             content = await commands.clean_content().convert(ctx=ctx, argument=text)
 
