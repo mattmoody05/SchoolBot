@@ -1,5 +1,6 @@
 # other imports
 import inspect
+import img
 
 # discord imports
 import discord
@@ -11,7 +12,7 @@ def SimpleEmbed(author):
     Embed = discord.Embed(
         colour=discord.Colour.light_gray()
     )
-    Embed.set_author(name=author)
+    Embed.set_author(name=author, icon_url=img.ImgSource)
     return Embed
 
 

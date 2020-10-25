@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 # other imports
-
+import img
 
 
 class Moderation(commands.Cog):
@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
         KickedEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        KickedEmbed.set_author(name = f"{user.display_name} has been kicked for : {reason}")
+        KickedEmbed.set_author(name = f"{user.display_name} has been kicked for : {reason}", icon_url=img.ImgMain)
         await ctx.send(embed = KickedEmbed)
         await user.kick(reason=reason)
 
@@ -32,7 +32,8 @@ class Moderation(commands.Cog):
         BannedEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        BannedEmbed.set_author(name = f"{user.display_name} has been banned for : {reason}")
+        BannedEmbed.set_author(name = f"{user.display_name} has been banned for : {reason}", icon_url=img.ImgMain)
+        await ctx.send(embed = BannedEmbed) 
         await user.ban(reason=reason)
 
 

@@ -2,15 +2,16 @@
 import discord
 from discord.ext import commands
 
-# other imports 
+# other imports
 import string
 import random
+import img
 
 # embeds
 PrivacyEmbed = discord.Embed(
     colour = discord.Colour.light_gray()
 )
-PrivacyEmbed.set_author(name = "Password Privacy")
+PrivacyEmbed.set_author(name = "Password Privacy", icon_url=img.ImgPassword)
 PrivacyEmbed.add_field(name = "How we generate passwords?", value = "We generate the passwords by picking random numbers, letters and symbols and then combining them into a password.", inline = False)
 PrivacyEmbed.add_field(name = "Do you store passwords?", value = "No, we will never store your password. The password will only be sent to you and once it has been generated and sent, the only person who can access you password is you.", inline = False)
 PrivacyEmbed.add_field(name = "Can I check the source code?", value = "Yes! The source code can be viewed by running `$source password_generate`", inline = False)
@@ -47,7 +48,7 @@ class Password(commands.Cog):
                 DMErrorEmbed = discord.Embed(
                     colour = discord.Colour.light_grey()
                 )
-                DMErrorEmbed.set_author("We cannot DM you, please check your privacy settings")
+                DMErrorEmbed.set_author("We cannot DM you, please check your privacy settings", icon_url=img.ImgPassword)
                 await ctx.send(embed = DMErrorEmbed)
 
 

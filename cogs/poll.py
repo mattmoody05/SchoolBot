@@ -7,7 +7,7 @@ def SimpleEmbed(author):
     Embed = discord.Embed(
         colour = discord.Colour.light_gray()
     )
-    Embed.set_author(name = author)
+    Embed.set_author(name = author, icon_url=img.ImgPoll)
     return Embed
 
 
@@ -52,7 +52,7 @@ class Poll(commands.Cog):
             if len(options) > 10:
                 await ctx.message.delete()
                 await ctx.send(ctx.author.mention, delete_after=10)
-                await ctx.send(SimpleEmbed("You cant make a poll with more than 10 options"), delete_after=10)
+                await ctx.send(embed = SimpleEmbed("You cant make a poll with more than 10 options"), delete_after=10)
                 return
             poll_embed = discord.Embed(
                 color=discord.Colour.light_grey()

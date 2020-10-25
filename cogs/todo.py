@@ -1,6 +1,18 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports
 import datetime
+import img
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour=discord.Colour.light_gray()
+    )
+    Embed.set_author(name=author, icon_url=img.ImgTodo)
+    return Embed
 
 
 class ToDo(commands.Cog):
@@ -10,7 +22,7 @@ class ToDo(commands.Cog):
     @commands.group(invoke_without_command=True, aliases=["td"])
     async def todo(self, ctx):
         await ctx.message.delete()
-        await ctx.send(f"{ctx.author.mention} please provide a task", delete_after=10)
+        await ctx.send(SimpleEmbed("Please provide a 'todo' command"), delete_after=10)
 
     @todo.command()
     async def insert(self, ctx, *, text: str):
@@ -20,11 +32,11 @@ class ToDo(commands.Cog):
             open_dms = False
 
             try:
-                await ctx.author.send(f"Todo - {work}")
+                await ctx.author.send(SimpleEmbed(f"Todo - {work}"))
                 open_dms = True
 
             except discord.Forbidden:
-                await ctx.send("You cant use this because I need to DM you :), please change your Privacy settings to use this Command!", delete_after=10)
+                await ctx.send(SimpleEmbed("The bot is not able to DM you, please check your privacy settings"), delete_after=10)
                 open_dms = False
 
             if open_dms:

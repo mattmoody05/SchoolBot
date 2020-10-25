@@ -2,13 +2,15 @@
 import discord
 from discord.ext import commands
 
+# other imports
+import img
 
 # functions
 def SimpleEmbed(author):
     Embed = discord.Embed(
         colour=discord.Colour.light_gray()
     )
-    Embed.set_author(name=author)
+    Embed.set_author(name=author, icon_url=img.ImgStudyMode)
     return Embed
 
 
@@ -50,8 +52,7 @@ class StudyMode(commands.Cog):
                     if author_id["user_id"] in mentions:
                         await message.delete()
                         await message.channel.send(message.author.metion)
-                        await message.channel.send(
-                            SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
+                        await message.channel.send(embed = SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
 
 
 def setup(client):

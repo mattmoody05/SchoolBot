@@ -1,5 +1,9 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports
+import img
 import asyncio
 
 

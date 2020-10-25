@@ -1,8 +1,12 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports
 import lavalink
 import re
 import aiohttp
+
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
 

@@ -1,5 +1,17 @@
+# discord imports
 import discord
 from discord.ext import commands
+
+# other imports
+import img
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour=discord.Colour.light_gray()
+    )
+    Embed.set_author(name=author, icon_url=img.ImgTag)
+    return Embed
 
 
 class Tag(commands.Cog):
@@ -12,9 +24,9 @@ class Tag(commands.Cog):
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             records = await self.client.db.select_from_tag(name)
             if not records:
-                await ctx.send("No tag found!")
+                await ctx.send(embed = SimpleEmbed("No tag found!"))
                 return
-            await ctx.send(records[0]["text"])
+            await ctx.send(embed = SimpleEmbed(records[0]["text"]))
             await self.client.db.update_uses_in_tag(name)
 
     @tag.command()
@@ -41,7 +53,7 @@ class Tag(commands.Cog):
             user_id = ctx.author.id
             records = await self.client.db.select_user_tag(user_id, name)
             if not records:
-                await ctx.send("No tag found!")
+                await ctx.send(embed = SimpleEmbed("No tag found!"))
                 return
             await self.client.db.delete_from_tag(user_id, name)
             await ctx.send(f"{ctx.author.mention} tag deleted Successfully!")
@@ -54,10 +66,10 @@ class Tag(commands.Cog):
             user_id = ctx.author.id
             records = await self.client.db.select_user_tag(user_id, old_name)
             if not records:
-                await ctx.send("No tag found!")
+                await ctx.send(embed = SimpleEmbed("No tag found!"))
                 return
             await self.client.db.rename_from_tag(user_id, old_name, new_name)
-            await ctx.send("Tag renamed Successfully!")
+            await ctx.send(embed = SimpleEmbed("Tag renamed Successfully!"))
 
     @tag.command()
     async def edit(self, ctx, command: str, *, text: str):
@@ -66,11 +78,11 @@ class Tag(commands.Cog):
             user_id = ctx.author.id
             records = await self.client.db.select_user_tag(user_id, name)
             if not records:
-                await ctx.send("No tag found!")
+                await ctx.send(embed = SimpleEmbed("No tag found!"))
                 return
             content = await commands.clean_content().convert(ctx=ctx, argument=text)
             await self.client.db.edit_from_tag(user_id, name, content)
-            await ctx.send("Tag edited Successfully!")
+            await ctx.send(embed = SimpleEmbed("Tag edited Successfully!"))
 
     @tag.command()
     async def all(self, ctx):
@@ -78,7 +90,7 @@ class Tag(commands.Cog):
             records = await self.client.db.select_all_from_tag()
 
             if not records:
-                await ctx.send("There are no tags yet!")
+                await ctx.send(embed = SimpleEmbed("There are no tags yet!"))
                 return
 
             pager = commands.Paginator()
@@ -90,7 +102,7 @@ class Tag(commands.Cog):
                 try:
                     await ctx.author.send(page)
                 except discord.Forbidden:
-                    await ctx.send("Could not DM you")
+                    await ctx.send(embed = SimpleEmbed("The bot is not able to DM you, please check your privacy settings"))
 
     @tag.command()
     async def list(self, ctx, mem: commands.MemberConverter = None):
@@ -98,7 +110,7 @@ class Tag(commands.Cog):
             member = mem or ctx.author
             records = await self.client.db.select_tag_of_member(member.id)
             if not records:
-                await ctx.send("No tags found")
+                await ctx.send(embed = SimpleEmbed("No tags found"))
                 return
 
             pager = commands.Paginator()
@@ -115,7 +127,7 @@ class Tag(commands.Cog):
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             record = await self.client.db.info_of_tag(name)
             if not record:
-                await ctx.send("No Tag Found!")
+                await ctx.send(embed = SimpleEmbed("No Tag Found!"))
                 return
             user_id = int(record[0]["user_id"])
             user = await self.client.fetch_user(user_id)
