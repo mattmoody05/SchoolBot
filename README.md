@@ -1,6 +1,6 @@
 # SchoolBot
 ## This is a open source bot developed by [Exainz](https://github.com/Exainz) and [Matt](https://github.com/mattmoody05) as a Timathon Project
-### Total features - 
+### Total features -
 1. **Math commands**
     - Math commands that cover many function that students could use while studying maths
     - ($help math)
@@ -27,8 +27,12 @@
 8. **Translation**
     - Translation to any language including detection of language
     - An aid for students to translate texts in a non-native language
-     - ($help translate)
-9. **Other Small Features and Games**
+    - ($help translate)
+9. **Currency Conversion**
+    - Converting between currencies all over the world
+    - Finding the value of a currency at the current time
+    - ($help currency)
+10. **Other Small Features and Games**
     - There are other small features including; study mode, timer, suggestions, polls, password generation, etc.
     - Various other small games including rock, paper, scissors and number guessing
     - ($help other)
