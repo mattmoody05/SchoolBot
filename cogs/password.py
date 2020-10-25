@@ -23,6 +23,7 @@ class Password(commands.Cog):
 
     @commands.command(aliases=["pg"])
     async def password_generate(self, ctx, password_len: int):
+        """ Generates a random password and is directly sent to you! """
         async with ctx.channel.typing():
             if password_len >= 1995:
                 await ctx.send(f"{ctx.author.mention} cant DM a password of that length, please specify a len lower than 1995")

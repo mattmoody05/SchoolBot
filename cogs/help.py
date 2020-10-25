@@ -126,54 +126,67 @@ class Help(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     async def help(self, ctx):
+        """ Sends the help embed """
         await ctx.send(embed=MainEmbed)
 
     @help.command()
     async def math(self, ctx):
+        """ Sends the math help embed """
         await ctx.send(embed=MathEmbed)
 
     @help.command()
     async def other(self, ctx):
+        """ Sends the other help embed """
         await ctx.send(embed=OtherEmbed)
 
     @help.command(aliases=["wikipedia"])
     async def wiki(self, ctx):
+        """ Sends the wiki help embed """
         await ctx.send(embed=WikiEmbed)
 
     @help.command(aliases=["dict"])
     async def dictionary(self, ctx):
+        """ Sends the dictionary help embed """
         await ctx.send(embed=DictEmbed)
 
     @help.command(aliases=["mod"])
     async def moderation(self, ctx):
+        """ Sends the moderation help embed """
         await ctx.send(embed=ModEmbed)
 
     @help.command(aliases=["yt"])
     async def youtube(self, ctx):
+        """ Sends the youtube help embed """
         await ctx.send(embed=YTEmbed)
 
     @help.command(aliases=["tt"])
     async def time_table(self, ctx):
+        """ Sends the timetable help embed """
         await ctx.send(embed=TTEmbed)
 
     @help.command(aliases=["td"])
     async def todo(self, ctx):
+        """ Sends the todo help embed """
         await ctx.send(embed=TDEmbed)
 
     @help.command(aliases=["ns"])
     async def notes_sharing(self, ctx):
+        """ Sends the notes_sharing help embed """
         await ctx.send(embed=NSEmbed)
 
     @help.command()
     async def tag(self, ctx):
+        """ Sends the tag help embed """
         await ctx.send(embed=TEmbed)
 
     @help.command()
     async def translate(self, ctx):
+        """ Sends the translate help embed """
         await ctx.send(embed=TSEmbed)
 
     @help.command()
     async def currency(self, ctx):
+        """ Sends the currency help embed """
         await ctx.send(embed = CurrencyEmbed)
 
 

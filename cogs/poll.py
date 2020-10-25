@@ -29,6 +29,7 @@ class Poll(commands.Cog):
 
     @commands.command()
     async def suggest(self, ctx, *, text: str):
+        """ Makes a yes/no poll """
         async with ctx.channel.typing():
             await ctx.message.delete()
             suggest_embed = discord.Embed(
@@ -42,6 +43,7 @@ class Poll(commands.Cog):
 
     @commands.command()
     async def poll(self, ctx, text: str, *options):
+        """ Makes a poll with multiple options """
         async with ctx.channel.typing():
             numbers = self.numbers
             if len(options) < 2:

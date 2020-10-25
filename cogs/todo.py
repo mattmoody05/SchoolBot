@@ -26,6 +26,7 @@ class ToDo(commands.Cog):
 
     @todo.command()
     async def insert(self, ctx, *, text: str):
+        """ Inserts task into your todo list """
         async with ctx.channel.typing():
             await ctx.message.delete()
             work = await commands.clean_content().convert(ctx=ctx, argument=text)
@@ -50,6 +51,7 @@ class ToDo(commands.Cog):
 
     @todo.command()
     async def delete(self, ctx, *, text: str):
+        """ Deletes a task from your todo list """
         async with ctx.channel.typing():
             await ctx.message.delete()
             user_id = ctx.author.id
@@ -65,6 +67,7 @@ class ToDo(commands.Cog):
 
     @todo.command()
     async def all(self, ctx):
+        """ Gets all the task in your todo list """
         async with ctx.channel.typing():
             user_id = ctx.author.id
             query = await self.client.db.select_all_from_todo(user_id)

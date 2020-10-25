@@ -26,6 +26,7 @@ class TimeTable(commands.Cog):
 
     @tasks.loop(minutes=1)
     async def check(self):
+        """ Checks that if there is a task in every minute """
         current_time = datetime.datetime.utcnow()
         week_days = self.week_days
         time = datetime.datetime.strftime(current_time, "%H %M")
@@ -45,6 +46,11 @@ class TimeTable(commands.Cog):
 
     @time_table.command()
     async def insert(self, ctx, day: str, time: str, *, text: str):
+        """
+        Inserts a task in your time table
+        <day> <time> <text>
+        eg. Monday 03:03 Maths Class
+        """
         async with ctx.channel.typing():
             await ctx.message.delete()
             day = day.lower()
@@ -72,6 +78,7 @@ class TimeTable(commands.Cog):
 
     @time_table.command()
     async def delete(self, ctx, day: str, time: str):
+        """ Deletes task from your time table """
         async with ctx.channel.typing():
             await ctx.message.delete()
             day = day.lower()
@@ -94,6 +101,7 @@ class TimeTable(commands.Cog):
 
     @time_table.command()
     async def all(self, ctx):
+        """ Prints all your schedule in your time table """
         async with ctx.channel.typing():
             user_id = ctx.author.id
             query = await self.client.db.select_all_from_time_table(user_id)

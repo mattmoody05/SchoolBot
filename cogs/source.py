@@ -22,6 +22,7 @@ class Source(commands.Cog):
 
     @commands.command()
     async def source(self, ctx, *, query: str):
+        """ Gets the command and sends it to make it in the pages and send that """
         async with ctx.channel.typing():
             cmd = self.client.get_command(query)
             if cmd is None:
@@ -39,6 +40,7 @@ class Source(commands.Cog):
                 return
 
     async def pager(self, content):
+        """ Converts the source into pages """
         pager = commands.Paginator()
 
         for line in content.splitlines():

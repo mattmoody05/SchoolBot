@@ -27,6 +27,7 @@ class dictionary(commands.Cog):
     # definitions
     @dict.command(aliases=["def"])
     async def define(self, ctx, *, arg: str):
+        """ Finds the meaning of a word """
         async with ctx.channel.typing():
             word = await commands.clean_content().convert(ctx=ctx, argument=arg)
 
@@ -60,6 +61,7 @@ class dictionary(commands.Cog):
     # synonyms
     @dict.command(aliases=["syn"])
     async def synonym(self, ctx, arg):
+        """ Finds the synonym of a word """
         async with ctx.channel.typing():
             Synonyms = str(PyDictionary().synonym(arg)).replace("[", "").replace("]", "").replace("'", "").split(
                 ",")  # getting the synonyms and putting them in a list (while removing any characters that are not needed)

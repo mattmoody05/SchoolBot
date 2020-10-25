@@ -20,6 +20,7 @@ class Tag(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     async def tag(self, ctx, *, command: str):
+        """ Checks that if there is a tag or else throw a error """
         async with ctx.channel.typing():
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             records = await self.client.db.select_from_tag(name)
@@ -31,6 +32,11 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def create(self, ctx, command: str, *, text: str):
+        """
+        Creates a tag (allowed for everyone because its only for students)
+        <name> <text>
+        eg. Hello Hello Mortals!
+        """
         async with ctx.channel.typing():
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             content = await commands.clean_content().convert(ctx=ctx, argument=text)
@@ -48,6 +54,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def delete(self, ctx, *, command: str):
+        """ Deletes you tag if that exists """
         async with ctx.channel.typing():
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             user_id = ctx.author.id
@@ -60,6 +67,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def rename(self, ctx, command: str, name: str):
+        """ Renames your tag """
         async with ctx.channel.typing():
             old_name = await commands.clean_content().convert(ctx=ctx, argument=command)
             new_name = await commands.clean_content().convert(ctx=ctx, argument=name)
@@ -73,6 +81,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def edit(self, ctx, command: str, *, text: str):
+        """ Edits your tag if it exists """
         async with ctx.channel.typing():
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             user_id = ctx.author.id
@@ -86,6 +95,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def all(self, ctx):
+        """ Gives all the tags """
         async with ctx.channel.typing():
             records = await self.client.db.select_all_from_tag()
 
@@ -106,6 +116,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def list(self, ctx, mem: commands.MemberConverter = None):
+        """ Gives a list of tag either of you or a person """
         async with ctx.channel.typing():
             member = mem or ctx.author
             records = await self.client.db.select_tag_of_member(member.id)
@@ -123,6 +134,7 @@ class Tag(commands.Cog):
 
     @tag.command()
     async def info(self, ctx, *, command: str):
+        """ Gives the info of the tag creator """
         async with ctx.channel.typing():
             name = await commands.clean_content().convert(ctx=ctx, argument=command)
             record = await self.client.db.info_of_tag(name)
