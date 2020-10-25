@@ -1,9 +1,3 @@
----
-title: SchoolBot Setup
-created: '2020-10-25T17:26:26.309Z'
-modified: '2020-10-25T23:05:01.325Z'
----
-
 # SchoolBot Setup
 This is a setup guide to install and run the SchoolBot from the source code provided
 
