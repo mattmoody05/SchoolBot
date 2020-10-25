@@ -1,11 +1,11 @@
 PASSWORD = ""
-
+PORT = 5432
 
 import asyncpg
 import asyncio
 
 async def main():
-    conn = await asyncpg.connect(host = "localhost", user = "postgres", database = "postgres", port = "5432", password = PASSWORD)
+    conn = await asyncpg.connect(host = "localhost", user = "postgres", database = "postgres", port = PORT, password = PASSWORD)
     query = """CREATE TABLE study_mode(
         user_id BIGINT NOT NULL,
         mode BOOL NOT NULL
