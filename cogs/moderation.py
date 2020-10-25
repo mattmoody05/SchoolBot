@@ -13,12 +13,14 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     @commands.command()
     async def purge(self, ctx, amount=100):
+        """ Bulk deletes the messages in the channel """
         channel = ctx.channel
         await channel.purge(limit=amount)
 
     @commands.has_permissions(kick_members=True)
     @commands.command()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
+        """ Kicks the member """
         KickedEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
@@ -29,6 +31,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(ban_members=True)
     @commands.command()
     async def ban(self, ctx, user: discord.Member, *, reason: str = None):
+        """ Bans the member """
         BannedEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )

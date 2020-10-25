@@ -46,21 +46,27 @@ class Errors(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.errors.CommandNotFound):
+            """ Command not found error """
             await ctx.send(content=f"{ctx.author.mention}", embed=NoCommandFoundEmbed)
 
         elif isinstance(error, commands.errors.MissingPermissions):
+            """ Missing Perms error """
             await ctx.send(content=f"{ctx.author.mention}", embed=UserPermissionsEmbed)
 
         elif isinstance(error, commands.errors.MissingRequiredArgument):
+            """ Missing Required Arguments error """
             await ctx.send(content=f"{ctx.author.mention}", embed=ArgsErrorEmbed)
 
         elif isinstance(error, commands.errors.BotMissingPermissions):
+            """ Bot missing Permissions error """
             await ctx.send(content=f"{ctx.author.mention}", embed=BotPermissionsEmbed)
 
         elif isinstance(error, commands.errors.MemberNotFound):
+            """ Member Not found error """
             await ctx.send(content=f"{ctx.author.mention}", embed=MemberNotFoundEmbed)
 
         elif isinstance(error, discord.errors.Forbidden):
+            """ Discord Forbidden """
             await ctx.send(content=f"{ctx.author.mention}", embed=ForbiddenError)
 
         else:

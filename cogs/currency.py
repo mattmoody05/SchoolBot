@@ -23,6 +23,7 @@ class Currency(commands.Cog):
 
     @currency.command()
     async def convert(self, ctx, arg1, arg2, arg3):
+        """ Converts the currency into other form """
         Converted = str(CurrencyConverter().convert(arg1, arg2, arg3))
         
         CurrencyConvertedEmbed = discord.Embed(
@@ -38,6 +39,7 @@ class Currency(commands.Cog):
 
     @currency.command()
     async def value(self, ctx, arg1):
+        """ Gives the value of currencies """
         Value = str(CurrencyConverter().convert(1, arg1, "USD"))
         
         CurrencyValueEmbed = discord.Embed(
@@ -50,6 +52,7 @@ class Currency(commands.Cog):
 
     @currency.command()
     async def list(self, ctx):
+        """ Lists of all the available  unicodes of currency """
         Currencies = str(CurrencyConverter().currencies).replace("'", "").replace("{", "").replace("}", "")
         
         CurrencyListEmbed = discord.Embed(

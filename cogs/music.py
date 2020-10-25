@@ -142,6 +142,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def queue(self, ctx):
+        """ Gives the queue of the songs """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
         queue = player.queue
 
@@ -160,6 +161,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def current(self, ctx):
+        """ Gives the current track playing """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
         current = player.current
 
@@ -175,6 +177,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def skip(self, ctx):
+        """ Skips the current song """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
 
         await player.skip()
@@ -182,6 +185,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def pause(self, ctx):
+        """ Pauses the current player """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
         state = player.paused
 
@@ -192,6 +196,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def resume(self, ctx):
+        """ Resumes the player """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
         state = player.paused
 
@@ -202,6 +207,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def volume(self, ctx, vol: int):
+        """ Changes the volume of the player """
         if vol > 9999:
             return await ctx.send(f"{ctx.author.mention} please specify a volume lower than this")
 
