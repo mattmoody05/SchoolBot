@@ -1,17 +1,18 @@
-# function to get an embed quickly
-def SimpleEmbed(author):
-    Embed = discord.Embed(
-        colour = discord.Colour.light_gray()
-    )
-    Embed.set_author(name = "Answer: " + str(author))
-    return Embed
-
 # discord imports
 from discord.ext import commands
 import discord
 
 # other imports 
 import math
+import img
+
+# function to get an embed quickly
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour = discord.Colour.light_gray()
+    )
+    Embed.set_author(name = f"Answer: {str(author)}", icon_url=img.ImgMath)
+    return Embed
 
 
 class Math(commands.Cog):

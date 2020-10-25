@@ -6,6 +6,9 @@ import discord
 from PyDictionary import PyDictionary
 from discord.ext import commands
 
+# other imports
+import img
+
 
 class dictionary(commands.Cog):
     def __init__(self, client):
@@ -18,8 +21,8 @@ class dictionary(commands.Cog):
                 colour=discord.Colour.light_gray()
             )
             await ctx.message.delete()
-            TaskErrorEmbed.set_author(name="Please specify a dict task!", delete_after=10)
-            await ctx.send(embed=TaskErrorEmbed)
+            TaskErrorEmbed.set_author(name="Please specify a dict task!", icon_url=img.ImgDictionary)
+            await ctx.send(embed=TaskErrorEmbed, delete_after = 10)
 
     # definitions
     @dict.command(aliases=["def"])
@@ -45,7 +48,7 @@ class dictionary(commands.Cog):
 
             meaning = discord.Embed(colour=discord.Colour.light_gray())
 
-            meaning.set_author(name=f"Definition of {data['word']}")
+            meaning.set_author(name=f"Definition of {data['word']}", icon_url=img.ImgDictionary)
             meaning.description = f"\n {data['definition']} \n"
             meaning.description += f"\n **Example** \n {data['example']} \n"
             meaning.description += f"\n You can read more here at - {data['permalink']} \n"
@@ -71,7 +74,7 @@ class dictionary(commands.Cog):
                 colour=discord.Colour.light_gray(),
                 description=string
             )
-            SynonymEmbed.set_author(name='Synonyms for "{}"'.format(arg))
+            SynonymEmbed.set_author(name='Synonyms for "{}"'.format(arg), icon_url=img.ImgDictionary)
 
             # sending the embed
             await ctx.send(embed=SynonymEmbed)

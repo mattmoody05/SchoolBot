@@ -5,6 +5,7 @@ from discord.ext import commands
 # other imports
 from currency_converter import CurrencyConverter
 from datetime import datetime
+import img
 
 
 class Currency(commands.Cog):
@@ -16,7 +17,7 @@ class Currency(commands.Cog):
         NoCommandEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        NoCommandEmbed.set_author(name = "Please provide a currency command")
+        NoCommandEmbed.set_author(name = "Please provide a currency command", icon_url=img.ImgCurrency)
         await ctx.send(embed = NoCommandEmbed)
 
 
@@ -27,7 +28,7 @@ class Currency(commands.Cog):
         CurrencyConvertedEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        CurrencyConvertedEmbed.set_author(name = "Currency Conversion")
+        CurrencyConvertedEmbed.set_author(name = "Currency Conversion", icon_url=img.ImgCurrency)
         CurrencyConvertedEmbed.add_field(name = "Input Currency", value = arg2)
         CurrencyConvertedEmbed.add_field(name = "Output Currency", value = arg3)
         CurrencyConvertedEmbed.add_field(name = "Output Value", value = f"{str(Converted)} {arg3}")
@@ -42,7 +43,7 @@ class Currency(commands.Cog):
         CurrencyValueEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        CurrencyValueEmbed.set_author(name = f"1 {arg1} == {Value} USD")
+        CurrencyValueEmbed.set_author(name = f"1 {arg1} == {Value} USD", icon_url=img.ImgCurrency)
 
         await ctx.send(embed = CurrencyValueEmbed)
 
@@ -54,7 +55,7 @@ class Currency(commands.Cog):
         CurrencyListEmbed = discord.Embed(
             colour = discord.Colour.light_gray()
         )
-        CurrencyListEmbed.set_author(name = "Currency Conversion List")
+        CurrencyListEmbed.set_author(name = "Currency Conversion List", icon_url=img.ImgCurrency)
         CurrencyListEmbed.add_field(name = "The below currencies are supported by the converter", value = Currencies)
         
         await ctx.send(embed = CurrencyListEmbed)
