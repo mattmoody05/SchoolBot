@@ -27,7 +27,7 @@ class Tag(commands.Cog):
             if not records:
                 await ctx.send(embed = SimpleEmbed("No tag found!"))
                 return
-            await ctx.send(embed = SimpleEmbed(records[0]["text"]))
+            await ctx.send(records[0]["text"])
             await self.client.db.update_uses_in_tag(name)
 
     @tag.command()

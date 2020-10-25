@@ -69,7 +69,11 @@ class Music(commands.Cog):
         ws = self.client._connection._get_websocket(guild_id)
         await ws.voice_state(str(guild_id), channel_id)
 
-    @commands.command()
+    @commands.group(invoke_without_command=True)
+    async def music(self, ctx):
+        await ctx.send(f"{ctx.author.mention} please specify a command!")
+
+    @music.command()
     async def play(self, ctx, *, query: str):
         """ Plays music as per query"""
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -128,7 +132,7 @@ class Music(commands.Cog):
         if not player.is_playing:
             await player.play()
 
-    @commands.command(aliases=['dc'])
+    @music.command(aliases=['dc'])
     async def disconnect(self, ctx):
         """ Disconnects the player from the voice channel and clears its queue. """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -144,7 +148,7 @@ class Music(commands.Cog):
         await self.connect_to(ctx.guild.id, None)
         await ctx.send(f"{ctx.author.mention} Disconnected Successfully!")
 
-    @commands.command()
+    @music.command()
     async def queue(self, ctx):
         """ Gives the queue of the songs """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -163,7 +167,7 @@ class Music(commands.Cog):
                 await ctx.send(page)
             return
 
-    @commands.command()
+    @music.command()
     async def current(self, ctx):
         """ Gives the current track playing """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -175,11 +179,12 @@ class Music(commands.Cog):
         async with ctx.channel.typing():
             current_embed = discord.Embed(color=discord.Color.light_grey())
             current_embed.set_author(name="Current Song")
-            current_embed.description = current.title
+            current_embed.description = f"\nName - {current.title}\n"
+            current_embed.description += f"\nUrl - {f'https://www.youtube.com/watch?v={current.identifier}'}\n"
             current_embed.set_footer(text=f"Requested by - {ctx.author}")
             return await ctx.send(embed=current_embed)
 
-    @commands.command()
+    @music.command()
     async def skip(self, ctx):
         """ Skips the current song """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -187,7 +192,7 @@ class Music(commands.Cog):
         await player.skip()
         await ctx.send(f"{ctx.author.mention} If there are no songs in the queue then the bot will quit")
 
-    @commands.command()
+    @music.command()
     async def pause(self, ctx):
         """ Pauses the current player """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -198,7 +203,7 @@ class Music(commands.Cog):
 
         await player.set_pause(pause=True)
 
-    @commands.command()
+    @music.command()
     async def resume(self, ctx):
         """ Resumes the player """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
@@ -209,7 +214,7 @@ class Music(commands.Cog):
 
         await player.set_pause(pause=False)
 
-    @commands.command()
+    @music.command()
     async def volume(self, ctx, vol: int):
         """ Changes the volume of the player """
         if vol > 9999:

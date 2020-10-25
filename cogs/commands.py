@@ -260,7 +260,7 @@ class Commands(commands.Cog):
 
     @commands.has_permissions(administrator=True)
     @commands.command()
-    async def announcement(self, ctx, topic: str, *, text):
+    async def announcement(self, ctx, topic: str, *, text: str):
         """ Makes a announcement embed for you """
         try:
             for channel in ctx.guild.channels:
@@ -333,29 +333,28 @@ class Commands(commands.Cog):
         bmi = weight / (height * height)
 
         if bmi < 15:
-            return await ctx.send(f"{ctx.author.mention} you are Very severely underweight! \nConsult a doctor quickly!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely underweight! \nConsult a doctor quickly!")
 
         elif 15 >= bmi < 16:
-            return await ctx.send(f"{ctx.author.mention} you are Severely underweight! \nGet a change in you diet and daily routine!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely underweight! \nGet a change in you diet and daily routine!")
 
         elif 16 >= bmi < 18.5:
-            return await ctx.send(f"{ctx.author.mention} you are Underweight! \nStart taking out some time for you")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Underweight! \nStart taking out some time for you")
 
         elif 18.5 >= bmi < 25:
-            return await ctx.send(f"{ctx.author.mention} you are Normal weighted!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Normal weighted!")
 
         elif 25 >= bmi < 30:
-            return await ctx.send(f"{ctx.author.mention} you are Overweight \nStart taking out some time for you")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Overweight \nStart taking out some time for you")
 
         elif 30 >= bmi < 35:
-            return await ctx.send(f"{ctx.author.mention} you are Moderately obese! \nGet a change in you diet and daily routine!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Moderately obese! \nGet a change in you diet and daily routine!")
 
         elif 35 >= bmi <= 40:
-            return await ctx.send(f"{ctx.author.mention} you are Severely obese! \nPlease start doing some exercise!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely obese! \nPlease start doing some exercise!")
 
         elif 40 > bmi:
-            return await ctx.send(f"{ctx.author.mention} you are Very severely obese! \nConsult a doctor quickly!")
-
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely obese! \nConsult a doctor quickly!")
 
 
 def setup(client):
