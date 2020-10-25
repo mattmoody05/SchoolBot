@@ -15,6 +15,7 @@ class Commands(commands.Cog):
     # ping command
     @commands.command()
     async def ping(self, ctx):
+        """ Gets the latency of the bot """
         async with ctx.channel.typing():
             LatencyEmbed = discord.Embed(
                 colour=discord.Colour.light_gray()
@@ -25,6 +26,7 @@ class Commands(commands.Cog):
     # timer command
     @commands.command()
     async def timer(self, ctx, hour: int, minute: int, second: int):
+        """ Sets a timer for <hour> <minute> <second> """
         async with ctx.channel.typing():
             hour_seconds = hour * 60 * 60
             minute_seconds = minute * 60
@@ -58,6 +60,7 @@ class Commands(commands.Cog):
     # dice roller
     @commands.command(aliases=["rd"])
     async def roll_dice(self, ctx):
+        """ Dice roll """
         async with ctx.channel.typing():
             number = random.randint(1, 6)
             NumberEmbed = discord.Embed(
@@ -69,6 +72,7 @@ class Commands(commands.Cog):
     # rock paper scissors command
     @commands.command(aliases=["sps"])
     async def stone_paper_scissor(self, ctx, opt: str):
+        """ Stone paper Scissor game """
         async with ctx.channel.typing():
             options = ("stone", "paper", "scissor")
             num = random.randint(0, 2)
@@ -151,6 +155,12 @@ class Commands(commands.Cog):
     # number guessing game
     @commands.command(aliases=["ng"])
     async def number_guess(self, ctx):
+        """
+        Number Guessing game
+        First two numbers are selected
+        One of those two numbers are given to user
+        the user needs to find that the second number is smaller or bigger than the given number
+        """
         async with ctx.channel.typing():
             hidden_number = random.randint(1, 100)
             given_number = random.randint(1, 100)
@@ -215,6 +225,7 @@ class Commands(commands.Cog):
 
     @commands.command(aliases=["mc"])
     async def member_count(self, ctx):
+        """ Counts the members in the guild """
         async with ctx.channel.typing():
             on_mobile = 0
             online = 0
@@ -250,6 +261,7 @@ class Commands(commands.Cog):
     @commands.has_permissions(administrator=True)
     @commands.command()
     async def announcement(self, ctx, topic: str, *, text):
+        """ Makes a announcement embed for you """
         try:
             for channel in ctx.guild.channels:
                 if channel.name.lower().count("announcement") > 0:
@@ -279,6 +291,7 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def roman(self, ctx, num: int):
+        """ Converts numbers to Roman Numerals """
         if num >= 4000:
             return await ctx.send(f"{ctx.author.mention} please specify a number lower or equal to 3999!")
         val = [
@@ -304,7 +317,9 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def bmi(self, ctx, weight: int, height: int):
-        """formula -  weight (kg) / [height (m)] * [height (m)]
+        """
+            Finds the BMI index for you
+            formula -  weight (kg) / [height (m)] * [height (m)]
             Less than 15 	Very severely underweight
             Between 15 and 16 	Severely underweight
             Between 16 and 18.5 	Underweight
@@ -314,7 +329,33 @@ class Commands(commands.Cog):
             Between 35 and 40 	Severely obese
             Over 40 	Very severely obese
         """
-        pass
+        height = height / 100
+        bmi = weight / (height * height)
+
+        if bmi < 15:
+            return await ctx.send(f"{ctx.author.mention} you are Very severely underweight! \nConsult a doctor quickly!")
+
+        elif 15 >= bmi < 16:
+            return await ctx.send(f"{ctx.author.mention} you are Severely underweight! \nGet a change in you diet and daily routine!")
+
+        elif 16 >= bmi < 18.5:
+            return await ctx.send(f"{ctx.author.mention} you are Underweight! \nStart taking out some time for you")
+
+        elif 18.5 >= bmi < 25:
+            return await ctx.send(f"{ctx.author.mention} you are Normal weighted!")
+
+        elif 25 >= bmi < 30:
+            return await ctx.send(f"{ctx.author.mention} you are Overweight \nStart taking out some time for you")
+
+        elif 30 >= bmi < 35:
+            return await ctx.send(f"{ctx.author.mention} you are Moderately obese! \nGet a change in you diet and daily routine!")
+
+        elif 35 >= bmi <= 40:
+            return await ctx.send(f"{ctx.author.mention} you are Severely obese! \nPlease start doing some exercise!")
+
+        elif 40 > bmi:
+            return await ctx.send(f"{ctx.author.mention} you are Very severely obese! \nConsult a doctor quickly!")
+
 
 
 def setup(client):
