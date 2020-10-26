@@ -113,22 +113,21 @@ Please note, the instructions for this section are designed in a way that they a
 1. Input the port of the database you specified earlier into the 'port' field, by default this will be 5432
 2. Input the password you spefified earlier in the 'password' field
 
-### Lavalink Config
-1. Before you run the bot, open cmd in the parent folder and make sure you have Java 13 installed.
-2. Type `java -jar .\Lavalink.jar` and hit enter.
-3. Lavalink server should be start running.
 
 ## Running the bot
 
 #### Windows
 1. Navigate to the bot folder within powershell
-2. Run the command `py -3 bot.py`
-3. If all working properly, your should see `x.py has been loaded` and `logged in as BotAccountName#1234` in your powershell window
+2. Run the command `java -jar .\Lavalink.jar` (this starts the lavalink (music) server)
+3. Run the command `py -3 bot.py`
+4. If all working properly, your should see `x.py has been loaded` and `logged in as BotAccountName#1234` in your powershell window
 
 #### macOS / Linux
 1. Navigate to the bot folder within powershell
-2. Run the command `python3 bot.py`
-3. If all working properly, your should see `x.py has been loaded` and `logged in as BotAccountName#1234` in your terminal window
+2. Run the command `java -jar .\Lavalink.jar` (this starts the lavalink (music) server)
+3. Run the command `python3 bot.py`
+4. If all working properly, your should see `x.py has been loaded` and `logged in as BotAccountName#1234` in your terminal window
+
 
 ## Still having issues?
 Yes, even if you have followed these instructions exactly, you may still be having issues, and we are happy to help. Just follow one of the ways outlined below to get help.
