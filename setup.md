@@ -25,13 +25,15 @@ Now that that's out of the way, lets get into it. Please follow the instructions
 
 ## Installing Python
 
+Note: Python 3.10a, 3.9 and very old versions aren't yet supported by discord.py, so please use recommended Python 3.8.5
+
 #### macOS:
 1. Install brew if you do not already have it installed using `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 2. Using brew, install python3 using the command `brew install python`
 3. Check that python is installed using the command `python3 --version`, this should return `Python 3.x.x`
 
 #### Windows
-1. Download python from [here](https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe) (official python website) and install. While completing the installation, please make sure you have the **'add to path'** option selected
+1. Download python from [here](https://www.python.org/ftp/python/3.8.5/python-3.8.5-amd64.exe) (official python website) and install. While completing the installation, please make sure you have the **'add to path'** option selected
 2. Check that python is installed by running `python --version` in powershell
 
 #### Linux
@@ -110,6 +112,11 @@ Please note, the instructions for this section are designed in a way that they a
 #### Database Config
 1. Input the port of the database you specified earlier into the 'port' field, by default this will be 5432
 2. Input the password you spefified earlier in the 'password' field
+
+### Lavalink Config
+1. Before you run the bot, open cmd in the parent folder and make sure you have Java 13 installed.
+2. Type `java -jar .\Lavalink.jar` and hit enter.
+3. Lavalink server should be start running.
 
 ## Running the bot
 
