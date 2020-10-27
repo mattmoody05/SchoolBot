@@ -7,3 +7,5 @@
 - aiohttp
 - CurrencyConverter
 - pyspellchecker
+- lavalink
+- googletrans

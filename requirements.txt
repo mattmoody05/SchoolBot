@@ -6,3 +6,5 @@ asyncpg
 aiohttp
 CurrencyConverter
 pyspellchecker
+lavalink
+googletrans

@@ -64,6 +64,9 @@ async def on_ready():
     # showing the user that the bot has logged in successfully and with what bot user
     print(f'\nLogged in as {client.user}\n')
 
+    # other messages
+    print("To stop the bot from running, run ^C")
+
 
 # command to reload cogs if not working properly
 @commands.has_guild_permissions(administrator=True)
