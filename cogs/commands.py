@@ -6,7 +6,7 @@ from discord.ext import commands
 import asyncio
 import random
 from datetime import datetime
-
+import calendar
 
 class Commands(commands.Cog):
     def __init__(self, client):
@@ -356,6 +356,31 @@ class Commands(commands.Cog):
         elif 40 > bmi:
             return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely obese! \nConsult a doctor quickly!")
 
+    @commands.command()
+    async def whois(self, ctx, mem: commands.MemberConverter = None):
+        member = mem or ctx.author
+        created_at = member.created_at
+        joined_at = member.joined_at
+        roles = member.roles
+
+        embed = discord.Embed(color=discord.Colour.lighter_grey())
+        embed.set_author(name=f"{ctx.author}", icon_url=ctx.author.avatar_url)
+        embed.add_field(name="Created", value=f"{calendar.day_name[created_at.weekday()]}, {created_at.day} {calendar.month_name[created_at.month]} {created_at.year} {created_at.hour}:{created_at.minute}", inline=False)
+        embed.add_field(name="Joined", value=f"{calendar.day_name[joined_at.weekday()]}, {joined_at.day} {calendar.month_name[joined_at.month]} {joined_at.year} {joined_at.hour}:{joined_at.minute}", inline=False)
+        embed.add_field(name=f"Roles [{len(roles)}]", value=" ".join(f"<@&{role.id}>" for role in roles))
+        embed.set_footer(text=f"ID - {member.id}")
+        await ctx.send(embed=embed)
+
+        print(type(created_at), type(joined_at), roles)
+
+    @commands.command(aliases=["av"])
+    async def avatar(self, ctx, mem: commands.MemberConverter = None):
+        member = mem or ctx.author
+        embed = discord.Embed(color=discord.Colour.lighter_grey())
+        embed.set_author(name=member, icon_url=member.avatar_url)
+        embed.set_image(url=member.avatar_url)
+
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Commands(client))
