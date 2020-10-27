@@ -51,8 +51,9 @@ async def on_connect():
 # changing the bot's status to "Listening to $help" and printing that the bot has logged in without any issues
 @client.event
 async def on_ready():
-    await client.change_presence(
-        activity=discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help"))
+
+    print("\nLoading cogs...\n")
 
     # automatically loading all cogs when started
     for filename in os.listdir("./cogs"):
@@ -61,7 +62,7 @@ async def on_ready():
             print("Loaded cog: {0}".format(filename))
 
     # showing the user that the bot has logged in successfully and with what bot user
-    print('\nLogged in as {0.user}'.format(client))
+    print(f'\nLogged in as {client.user}\n')
 
 
 # command to reload cogs if not working properly

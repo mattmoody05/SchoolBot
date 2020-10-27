@@ -6,3 +6,4 @@
 - asyncpg
 - aiohttp
 - CurrencyConverter
+- pyspellchecker

@@ -39,6 +39,8 @@ OtherEmbed.add_field(name="number_guess", value="Game in which you need to guess
 OtherEmbed.add_field(name="announcement <topic> <description>", value="Only for Admins \nMakes a announcement channel is not and sends a message as a Server Announcement", inline=False)
 OtherEmbed.add_field(name="roman <number>", value="Converts the number into roman numeral, number should be less than 3999", inline=False)
 OtherEmbed.add_field(name="bmi <weight> <height>", value="Tells you your BMI and your current health status according to your BMI", inline=False)
+OtherEmbed.add_field(name = "spellcheck <word>", value = "Suggests the correct spelling for a word if you are unsure")
+
 
 # wiki embed
 WikiEmbed = discord.Embed(

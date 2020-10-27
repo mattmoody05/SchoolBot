@@ -7,6 +7,9 @@ import asyncio
 import random
 from datetime import datetime
 import calendar
+from spellchecker import SpellChecker
+import img
+
 
 class Commands(commands.Cog):
     def __init__(self, client):
@@ -373,6 +376,7 @@ class Commands(commands.Cog):
 
         print(type(created_at), type(joined_at), roles)
 
+
     @commands.command(aliases=["av"])
     async def avatar(self, ctx, mem: commands.MemberConverter = None):
         member = mem or ctx.author
@@ -381,6 +385,26 @@ class Commands(commands.Cog):
         embed.set_image(url=member.avatar_url)
 
         await ctx.send(embed=embed)
+
+
+    @commands.command(aliases = ["spch"])
+    async def spellcheck(self, ctx, arg):
+        spell = SpellChecker()
+        main = spell.correction(arg)
+        others = spell.candidates(arg)
+        otherstr = ""
+        for others in others:
+            otherstr = f"{otherstr}{others}, "
+
+        SpellingEmbed = discord.Embed(
+            colour = discord.Colour.light_grey()
+        )
+        SpellingEmbed.set_author(name = f"Spellcheck for: {arg}", icon_url = img.ImgDictionary)
+        SpellingEmbed.add_field(name = "Most likely spelling", value = main, inline = False)
+        SpellingEmbed.add_field(name = "Other possible corrections", value = otherstr, inline = False)
+
+        await ctx.send(embed = SpellingEmbed)
+
 
 def setup(client):
     client.add_cog(Commands(client))

@@ -5,3 +5,4 @@ youtube-search
 asyncpg
 aiohttp
 CurrencyConverter
+pyspellchecker
