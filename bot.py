@@ -36,6 +36,7 @@ client.info = {
     "max_size": data["max_size"],
     "min_size": data["min_size"]
 }
+client.complain_channel = data["complain_channel"]
 
 # removing the default help command so that a better one can be made using embeds
 client.remove_command("help")

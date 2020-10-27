@@ -47,11 +47,11 @@ class StudyMode(commands.Cog):
             if record:
                 mentions = [x.id for x in message.mentions if not x.bot]
                 for author_id in record:
-                    if message.author.id == author_id["user_id"]:
+                    if message.author.id == author_id["user_id"] and message.guild:
                         await message.delete()
                         await message.channel.send(message.author.mention)
                         await message.channel.send(embed=SimpleEmbed("Please go and study!"))
-                    if author_id["user_id"] in mentions:
+                    if author_id["user_id"] in mentions and message.guild:
                         await message.delete()
                         await message.channel.send(message.author.metion)
                         await message.channel.send(embed = SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
