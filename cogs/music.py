@@ -6,6 +6,7 @@ from discord.ext import commands
 import lavalink
 import re
 import aiohttp
+import img
 
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
@@ -104,7 +105,7 @@ class Music(commands.Cog):
                 player.add(requester=ctx.author.id, track=track)
 
             playlist = discord.Embed(color=discord.Color.light_grey())
-            playlist.set_author(name="Playlist loaded!")
+            playlist.set_author(name="Playlist loaded!", icon_url = img.ImgMusic)
             playlist.description = f"\n Name - {results['playlistInfo']['name']} \n"
             playlist.description += f"\n Url - <{query}> \n"
             playlist.set_footer(text=f"Requested by - {ctx.author}")
@@ -118,7 +119,7 @@ class Music(commands.Cog):
             player.add(requester=ctx.author.id, track=track)
 
             single_url = discord.Embed(color=discord.Color.light_grey())
-            single_url.set_author(name=f"Video loaded!")
+            single_url.set_author(name=f"Video loaded!", icon_url=img.ImgMusic)
             single_url.description = f"\n Name - {track['info']['title']} \n"
             single_url.description += f"\n By - {track['info']['author']} \n"
             single_url.description += f"\n Url - <{track['info']['uri']}> \n"
@@ -178,7 +179,7 @@ class Music(commands.Cog):
 
         async with ctx.channel.typing():
             current_embed = discord.Embed(color=discord.Color.light_grey())
-            current_embed.set_author(name="Current Song")
+            current_embed.set_author(name="Current Song", icon_url = img.ImgMusic)
             current_embed.description = f"\nName - {current.title}\n"
             current_embed.description += f"\nUrl - {f'https://www.youtube.com/watch?v={current.identifier}'}\n"
             current_embed.set_footer(text=f"Requested by - {ctx.author}")

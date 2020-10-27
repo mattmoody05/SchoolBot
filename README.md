@@ -1,5 +1,5 @@
 # SchoolBot
-## This is a open source bot developed by [Exainz](https://github.com/Exainz) and [Matt](https://github.com/mattmoody05) as a Timathon Project
+## A discord bot developed by [Exainz](https://github.com/Exainz) and [Matt](https://github.com/mattmoody05), completely open source, for a 'Timathon' Project
 ### Please see [here](setup.md) for detailed setup instructions
 ### Total features -
 1. **Math commands**
