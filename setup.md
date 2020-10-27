@@ -57,7 +57,7 @@ Note: Python 3.10a, 3.9 and very old versions aren't yet supported by discord.py
 
 #### Requirements.txt working
 1. Navigate to the folder of the bot within terminal / powershell
-2. Run `pip3 install requirements.txt`
+2. Run `pip3 install -r requirements.txt`
 
 #### Requirements.txt not working
 1. Navigate to the folder of the bot within terminal / powershell
