@@ -74,7 +74,7 @@ class Music(commands.Cog):
     async def music(self, ctx):
         await ctx.send(f"{ctx.author.mention} please specify a command!")
 
-    @music.command()
+    @music.command(aliases=["play_song"])
     async def play(self, ctx, *, query: str):
         """ Plays music as per query"""
         player = self.client.lavalink.player_manager.get(ctx.guild.id)

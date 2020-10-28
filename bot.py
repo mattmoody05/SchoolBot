@@ -51,7 +51,7 @@ async def on_connect():
 # changing the bot's status to "Listening to $help" and printing that the bot has logged in without any issues
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help | DM Complains"))
 
     print("\nLoading cogs...\n")
 
