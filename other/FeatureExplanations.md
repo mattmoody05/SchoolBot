@@ -134,6 +134,8 @@ For generating passwords, your privacy and security it our main priority. When y
 
 
 ## Help
+Using the help commands in discord displays the correct use of arguments alongside all of these commands. The explanation of each command can also be viewed using the set of help commands.
+
 - ***help*** - Displays the areas of help that can be accessed using the help commands
 - ***help other*** - Displays help for the 'other' category
 - ***help math*** - Displays help for the 'math' category
