@@ -408,16 +408,17 @@ class Commands(commands.Cog):
         await ctx.send(embed = SpellingEmbed)
 
 
-        @commands.command()
-        async def github(self, ctx):
-            GithubEmbed = discord.Embed(
-                colour = discord.Colour.light_gray()
-            )
-            GithubEmbed.set_author(name = "SchoolBot Github", icon_url = img.ImgMain)
-            GithubEmbed.add_field(name = "Contributers", value = [Matt](https://github.com/mattmoody05), [Exainz](https://github.com/Exainz), inline = False)
-            GithubEmbed.add_field(name = "Text Editors / IDE", value = "Visual Studio Code, Atom by Github, PyCharm", inline = False)
-            GithubEmbed.add_field(name = "Database used", value = "PostgreSQL", inline = False)
-            GithubEmbed.add_field(name = 'Github Link', value = [https://github.com/mattmoody05/SchoolBot](https://github.com/mattmoody05/SchoolBot), inline = False)
+    @commands.command()
+    async def github(self, ctx):
+        GithubEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        GithubEmbed.set_author(name = "SchoolBot Github", icon_url = img.ImgMain)
+        GithubEmbed.add_field(name = "Contributers", value = "[Matt](https://github.com/mattmoody05), [Exainz](https://github.com/Exainz)", inline = False)
+        GithubEmbed.add_field(name = "Text Editors / IDE", value = "Visual Studio Code, Atom by Github, PyCharm", inline = False)
+        GithubEmbed.add_field(name = "Database used", value = "PostgreSQL", inline = False)
+        GithubEmbed.add_field(name = 'Github Link', value = "[https://github.com/mattmoody05/SchoolBot](https://github.com/mattmoody05/SchoolBot)", inline = False)
+        await ctx.send(embed = GithubEmbed)
 
 
 def setup(client):
