@@ -226,6 +226,8 @@ class Commands(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.send(f"{ctx.author.mention} Time out error!")
 
+
+    # member count command
     @commands.command(aliases=["mc"])
     async def member_count(self, ctx):
         """ Counts the members in the guild """
@@ -366,7 +368,7 @@ class Commands(commands.Cog):
         joined_at = member.joined_at
         roles = member.roles
 
-        embed = discord.Embed(color=discord.Colour.lighter_grey())
+        embed = discord.Embed(color=discord.Colour.light_grey())
         embed.set_author(name=f"{ctx.author}", icon_url=ctx.author.avatar_url)
         embed.add_field(name="Created", value=f"{calendar.day_name[created_at.weekday()]}, {created_at.day} {calendar.month_name[created_at.month]} {created_at.year} {created_at.hour}:{created_at.minute}", inline=False)
         embed.add_field(name="Joined", value=f"{calendar.day_name[joined_at.weekday()]}, {joined_at.day} {calendar.month_name[joined_at.month]} {joined_at.year} {joined_at.hour}:{joined_at.minute}", inline=False)
