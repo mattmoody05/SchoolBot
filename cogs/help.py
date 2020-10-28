@@ -91,7 +91,7 @@ TTEmbed = discord.Embed(
     colour=discord.Colour.light_grey())
 TTEmbed.set_author(name="Schoolbot help - Time Table", icon_url=img.ImgTimetable)
 TTEmbed.add_field(name="time_table insert <Name of the day> <Time in GMT> <Work>",
-                  value="Reminds you for for that task in your DM's \n e.g - $time_table insert Monday 03:33 Maths class",
+                  value="Reminds you when that task is happening, in your DM's \n e.g - $time_table insert Monday 03:33 Maths class",
                   inline=False)
 TTEmbed.add_field(name="time_table delete <Name of the day> <Time>", value="Deletes the task if it exists",
                   inline=False)
