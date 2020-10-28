@@ -35,12 +35,19 @@ OtherEmbed.add_field(name='password_generate <len of password>',
                      value="Gives a random password of the specified length", inline=False)
 OtherEmbed.add_field(name="roll_dice", value="Rolls a dice for you", inline=False)
 OtherEmbed.add_field(name="stone_paper_scissor <option>", value="Plays Stone Paper game with you", inline=False)
-OtherEmbed.add_field(name="number_guess", value="Game in which you need to guess that a number is higher or lower than the number which is sent", inline=False)
-OtherEmbed.add_field(name="announcement <topic> <description>", value="Only for Admins \nMakes a announcement channel is not and sends a message as a Server Announcement", inline=False)
-OtherEmbed.add_field(name="roman <number>", value="Converts the number into roman numeral, number should be less than 3999", inline=False)
-OtherEmbed.add_field(name="bmi <weight> <height>", value="Tells you your BMI and your current health status according to your BMI", inline=False)
-OtherEmbed.add_field(name = "spellcheck <word>", value = "Suggests the correct spelling for a word if you are unsure")
-
+OtherEmbed.add_field(name="number_guess",
+                     value="Game in which you need to guess that a number is higher or lower than the number which is sent",
+                     inline=False)
+OtherEmbed.add_field(name="announcement <topic> <description>",
+                     value="Only for Admins \nMakes a announcement channel is not and sends a message as a Server Announcement",
+                     inline=False)
+OtherEmbed.add_field(name="roman <number>",
+                     value="Converts the number into roman numeral, number should be less than 3999", inline=False)
+OtherEmbed.add_field(name="bmi <weight> <height>",
+                     value="Tells you your BMI and your current health status according to your BMI", inline=False)
+OtherEmbed.add_field(name="spellcheck <word>", value="Suggests the correct spelling for a word if you are unsure")
+OtherEmbed.add_field(name="whois <member>", value="Gives a full detail about the user")
+OtherEmbed.add_field(name="avatar <member>", value="Gives the avatar of the member")
 
 # wiki embed
 WikiEmbed = discord.Embed(

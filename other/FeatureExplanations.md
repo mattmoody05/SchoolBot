@@ -26,7 +26,7 @@ Features are grouped as they are in cogs.
 
 
 ## Complaints
-When the bot gets send a DM, the content of this DM will be sent the the specified 'complaints' channel within discord (the ID of this channel is specified in the config.json file). Then, a person in authority is able to deal with the complaint
+When the bot gets a DM, the content of this DM will be sent the the specified 'complaints' channel within discord (the ID of this channel is specified in the config.json file). Then, a person in authority is able to deal with the complaint
 
 
 ## Currency Conversion
