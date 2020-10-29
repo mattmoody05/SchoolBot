@@ -35,7 +35,7 @@ When the bot gets a DM, the content of this DM will be sent the the specified 'c
 - ***currency list*** - List all the available currencies that the bot can interchange
 
 
-## Dictionary & Thesuarus
+## Dictionary & Thesaurus
 - ***dict define*** - Defines a given word
 - ***dict synonym*** - Finds synonyms for a given word
 

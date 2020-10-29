@@ -1,9 +1,9 @@
-discord.py
+discord.py[Voice]
 PyDictionary
 Wikipedia-API
 youtube-search
 asyncpg
-aiohttp
+aiohttp==3.6.0
 CurrencyConverter
 pyspellchecker
 lavalink
