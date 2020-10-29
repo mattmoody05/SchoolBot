@@ -48,6 +48,7 @@ OtherEmbed.add_field(name="bmi <weight> <height>",
 OtherEmbed.add_field(name="spellcheck <word>", value="Suggests the correct spelling for a word if you are unsure")
 OtherEmbed.add_field(name="whois <member>", value="Gives a full detail about the user")
 OtherEmbed.add_field(name="avatar <member>", value="Gives the avatar of the member")
+OtherEmbed.add_field(name = "github", value = "Returns some information for the bot, including a link to the github repo")
 
 # wiki embed
 WikiEmbed = discord.Embed(
