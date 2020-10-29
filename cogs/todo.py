@@ -22,7 +22,7 @@ class ToDo(commands.Cog):
     @commands.group(invoke_without_command=True, aliases=["td"])
     async def todo(self, ctx):
         await ctx.message.delete()
-        await ctx.send(SimpleEmbed("Please provide a 'todo' command"), delete_after=10)
+        await ctx.send(embed = SimpleEmbed("Please provide a 'todo' command"), delete_after=10)
 
     @todo.command()
     async def insert(self, ctx, *, text: str):
@@ -33,11 +33,11 @@ class ToDo(commands.Cog):
             open_dms = False
 
             try:
-                await ctx.author.send(SimpleEmbed(f"Todo - {work}"))
+                await ctx.author.send(embed = SimpleEmbed(f"Todo - {work}"))
                 open_dms = True
 
             except discord.Forbidden:
-                await ctx.send(SimpleEmbed("The bot is not able to DM you, please check your privacy settings"), delete_after=10)
+                await ctx.send(embed = SimpleEmbed("The bot is not able to DM you, please check your privacy settings"), delete_after=10)
                 open_dms = False
 
             if open_dms:
@@ -63,7 +63,7 @@ class ToDo(commands.Cog):
                 return
 
             await self.client.db.delete_from_todo(user_id, work)
-            await ctx.send(f"Task deleted successfully!")
+            await ctx.send(embed = SimpleEmbed("Task deleted successfully!"))
 
     @todo.command()
     async def all(self, ctx):

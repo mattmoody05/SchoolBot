@@ -1,0 +1,1 @@
+- When using cossec and sec, if a number is invalid, there is no error message, make sure that if the command fails, there is a message

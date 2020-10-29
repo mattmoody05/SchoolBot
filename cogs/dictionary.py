@@ -24,9 +24,29 @@ class dictionary(commands.Cog):
             TaskErrorEmbed.set_author(name="Please specify a dict task!", icon_url=img.ImgDictionary)
             await ctx.send(embed=TaskErrorEmbed, delete_after = 10)
 
-    # definitions
-    @dict.command(aliases=["def"])
-    async def define(self, ctx, *, arg: str):
+
+    # define command
+    @dict.command(aliases = ["def"])
+    async def define(self, ctx, arg):
+        dictionary = PyDictionary()
+        
+        Definition = dictionary.meaning(arg)
+        
+        DefinitionEmbed = discord.Embed(
+            colour = discord.Colour.light_gray()
+        )
+        DefinitionEmbed.set_author(name = 'Definition of "{}"'.format(arg))
+        
+        for i in range(len(Definition)):
+            CurrentDef = str(Definition[list(Definition)[i]]).replace("[", "").replace("]", "")
+            DefinitionEmbed.add_field(name = list(Definition)[i], value=CurrentDef, inline=False)
+        
+        await ctx.send(embed = DefinitionEmbed)
+
+
+    # urban defs
+    @dict.command()
+    async def urban(self, ctx, *, arg: str):
         """ Finds the meaning of a word """
         async with ctx.channel.typing():
             word = await commands.clean_content().convert(ctx=ctx, argument=arg)

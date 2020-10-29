@@ -1,5 +1,6 @@
 # discord imports
 import discord
+from discord import colour
 from discord.ext import commands
 
 # other imports
@@ -322,6 +323,12 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def bmi(self, ctx, weight: int, height: int):
+        WarningEmbed = discord.Embed(
+            colour = discord.Colour.light_gray(),
+            description = "Please note that this IS NOT MEDICAL ADVICE, if you are concerned about your health or wellbeing, consult a doctor."
+        )
+        WarningEmbed.set_author(name = "Warning!", icon_url=img.ImgError)
+        
         """
             Finds the BMI index for you
             formula -  weight (kg) / [height (m)] * [height (m)]
@@ -338,28 +345,28 @@ class Commands(commands.Cog):
         bmi = weight / (height * height)
 
         if bmi < 15:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely underweight! \nConsult a doctor quickly!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely underweight! \nConsult a doctor quickly!", embed = WarningEmbed)
 
         elif 15 >= bmi < 16:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely underweight! \nGet a change in you diet and daily routine!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely underweight! \nGet a change in you diet and daily routine!", embed = WarningEmbed)
 
         elif 16 >= bmi < 18.5:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Underweight! \nStart taking out some time for you")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Underweight! \nStart taking out some time for you", embed = WarningEmbed)
 
         elif 18.5 >= bmi < 25:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Normal weighted!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Normal weighted!", embed = WarningEmbed)
 
         elif 25 >= bmi < 30:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Overweight \nStart taking out some time for you")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Overweight \nStart taking out some time for you", embed = WarningEmbed)
 
         elif 30 >= bmi < 35:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Moderately obese! \nGet a change in you diet and daily routine!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Moderately obese! \nGet a change in you diet and daily routine!", embed = WarningEmbed)
 
         elif 35 >= bmi <= 40:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely obese! \nPlease start doing some exercise!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Severely obese! \nPlease start doing some exercise!", embed = WarningEmbed)
 
         elif 40 > bmi:
-            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely obese! \nConsult a doctor quickly!")
+            return await ctx.send(f"{ctx.author.mention} your BMI index is {bmi} \nYou are Very severely obese! \nConsult a doctor quickly!", embed = WarningEmbed)
 
     @commands.command()
     async def whois(self, ctx, mem: commands.MemberConverter = None):

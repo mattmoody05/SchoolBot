@@ -1,9 +1,8 @@
 import json
-
 import discord
 from discord.ext import commands
 from youtube_search import YoutubeSearch
-
+import img
 
 class Youtube(commands.Cog):
     def __init__(self, client):
@@ -22,7 +21,7 @@ class Youtube(commands.Cog):
             SearchEmbed = discord.Embed(
                 colour=discord.Colour.light_gray()
             )
-            SearchEmbed.set_author(name="Youtube results for '{}'".format(query[:-1]))
+            SearchEmbed.set_author(name="Youtube results for '{}'".format(query[:-1]), icon_url=img.ImgYoutube)
             SearchEmbed.add_field(name="Video Title:", value=resultsjson['videos'][0]['title'], inline=False)
             SearchEmbed.add_field(name="Channel name:", value=resultsjson['videos'][0]['channel'], inline=False)
             SearchEmbed.add_field(name="Video URL:",

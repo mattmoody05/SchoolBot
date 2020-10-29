@@ -1,5 +1,6 @@
 # discord imports
 import discord
+from discord.colour import Colour
 from discord.ext import commands
 
 # other imports
@@ -7,6 +8,14 @@ import lavalink
 import re
 import aiohttp
 import img
+
+# functions
+def SimpleEmbed(author):
+    Embed = discord.Embed(
+        colour = discord.Colour.light_gray()
+    )
+    Embed.set_author(name = author, icon_url=img.ImgMusic)
+    return Embed
 
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
@@ -191,7 +200,7 @@ class Music(commands.Cog):
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
 
         await player.skip()
-        await ctx.send(f"{ctx.author.mention} If there are no songs in the queue then the bot will quit")
+        await ctx.send(embed = SimpleEmbed("Song Skipped"))
 
     @music.command()
     async def pause(self, ctx):
@@ -203,6 +212,7 @@ class Music(commands.Cog):
             return await ctx.send(f"{ctx.author.mention} Player is already paused!")
 
         await player.set_pause(pause=True)
+        await ctx.send(embed = SimpleEmbed("Song Paused"))
 
     @music.command()
     async def resume(self, ctx):
@@ -214,6 +224,7 @@ class Music(commands.Cog):
             return await ctx.send(f"{ctx.author.mention} player is already resumed!")
 
         await player.set_pause(pause=False)
+        await ctx.send(embed = SimpleEmbed("Song resumed"))
 
     @music.command()
     async def volume(self, ctx, vol: int):
@@ -225,7 +236,7 @@ class Music(commands.Cog):
         volume = player.volume
 
         await player.set_volume(vol=vol)
-        await ctx.send(f"{ctx.author.mention} Volume changed from {volume} to {vol}")
+        await ctx.send(SimpleEmbed(f"Volume changed from {volume} to {vol}"))
 
 
 def setup(client):

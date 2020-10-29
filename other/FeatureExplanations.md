@@ -22,7 +22,7 @@ Features are grouped as they are in cogs.
 - ***suggest*** - Creates a yes or no poll
 - ***source*** - Allows the user to view the source code for a command within discord
 - ***study_mode*** - Turns on the 'study mode' feature so you are not disturbed by discord during your studies
-- ***youtube search*** - Returns YouTube video information on the search query provided
+- ***youtube*** - Returns YouTube video information on the search query provided
 - ***github*** - Returns some information about the bot, including a link to the Github repo
 
 
@@ -38,6 +38,7 @@ When the bot gets a DM, the content of this DM will be sent the the specified 'c
 
 ## Dictionary & Thesaurus
 - ***dict define*** - Defines a given word
+- ***dict urban*** - Defines a given word using urban dictionary
 - ***dict synonym*** - Finds synonyms for a given word
 
 

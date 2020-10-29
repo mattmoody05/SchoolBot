@@ -1,0 +1,13 @@
+Help - All good, modified some 
+Math - all good except sec & cossec
+Wiki - all good, added a notice to help command warning about long DM messages
+Dict - changed slightly, but fixed
+Moderation - all good
+Music - All good, added some embeds to make more user friendly
+todo - fixed embed error, all working now
+youtube - slightly modified help command for this but working now
+note sharing - modified help command, all working
+tags - all working
+translate - help modified
+currency - all good
+bmi - added health warning

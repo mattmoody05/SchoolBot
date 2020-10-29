@@ -14,7 +14,7 @@ MainEmbed.add_field(name="Help Areas",
                     value="Below are the diffent areas of help you can access\nPlease run ***help <area>*** to get specific help. e.g ***help math***",
                     inline=False)
 MainEmbed.add_field(name="Areas of help",
-                    value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- Notes Sharing\n- tag\n- translate\n- currency\n- music\n- other",
+                    value="- math\n- wikipedia\n- dictionary\n- moderation\n- todo\n- youtube\n- time_table\n- note_sharing\n- tag\n- translate\n- currency\n- music\n- other",
                     inline=False)
 
 # other embed
@@ -46,9 +46,9 @@ OtherEmbed.add_field(name="roman <number>",
 OtherEmbed.add_field(name="bmi <weight> <height>",
                      value="Tells you your BMI and your current health status according to your BMI", inline=False)
 OtherEmbed.add_field(name="spellcheck <word>", value="Suggests the correct spelling for a word if you are unsure")
-OtherEmbed.add_field(name="whois <member>", value="Gives a full detail about the user")
-OtherEmbed.add_field(name="avatar <member>", value="Gives the avatar of the member")
-OtherEmbed.add_field(name = "github", value = "Returns some information for the bot, including a link to the github repo")
+OtherEmbed.add_field(name="whois <member>", value="Gives a full detail about the user", inline=False)
+OtherEmbed.add_field(name="avatar <member>", value="Gives the avatar of the member", inline=False)
+OtherEmbed.add_field(name = "github", value = "Returns some information for the bot, including a link to the github repo", inline=False)
 
 # wiki embed
 WikiEmbed = discord.Embed(
@@ -57,7 +57,7 @@ WikiEmbed = discord.Embed(
 WikiEmbed.set_author(name="Schoolbot - Wikipedia help", icon_url=img.ImgWikipedia)
 WikiEmbed.add_field(name="wiki summary <query>",
                     value="Searches wikipedia for your query, returning a summary of that topic", inline=False)
-WikiEmbed.add_field(name="wiki full <query>", value="Searches wikipedia for your query and returns the full article",
+WikiEmbed.add_field(name="wiki full <query>", value="Searches wikipedia for your query and returns the full article (This article is DMed to you, please note that longer articles will be split into different message)",
                     inline=False)
 
 # dictionary embed
@@ -66,6 +66,7 @@ DictEmbed = discord.Embed(
 )
 DictEmbed.set_author(name="Schoolbot - Dictionary help", icon_url=img.ImgDictionary)
 DictEmbed.add_field(name="dict define <word>", value="Defines the word provided", inline=False)
+DictEmbed.add_field(name="dict urban <word>", value="Defines the word provided using urban dictionary", inline=False)
 DictEmbed.add_field(name="dict synonym <word>", value="Gives alternative words for the word provided", inline=False)
 
 # moderation embed
@@ -92,7 +93,7 @@ YTEmbed = discord.Embed(
     colour=discord.Colour.light_gray()
 )
 YTEmbed.set_author(name="Schoolbot help - Youtube", icon_url=img.ImgYoutube)
-YTEmbed.add_field(name="youtube search <query>", value="Searches youtube and returns info on your query", inline=False)
+YTEmbed.add_field(name="youtube <query>", value="Searches youtube and returns info on your query", inline=False)
 
 # time-table embed
 TTEmbed = discord.Embed(
@@ -135,7 +136,7 @@ TEmbed.add_field(name="tag all", value="DM's all the tags", inline=False)
 TSEmbed = discord.Embed(color=discord.Colour.light_grey())
 TSEmbed.set_author(name="Schoolbot help - Translator", icon_url=img.ImgTranslate)
 TSEmbed.add_field(name="translate <language unicode> <text>",
-                  value="Translate the text in the language provided by you", inline=False)
+                  value="Translate the text provided to the language provided by you", inline=False)
 TSEmbed.add_field(name="translate detect <text>", value="Detects the language of the text that you have entered",
                   inline=False)
 TSEmbed.add_field(name="translate all", value="Gives all the unicode of all the languages supported", inline=False)
@@ -218,7 +219,7 @@ class Help(commands.Cog):
         await ctx.send(embed=TDEmbed)
 
     @help.command(aliases=["ns"])
-    async def notes_sharing(self, ctx):
+    async def note_sharing(self, ctx):
         """ Sends the notes_sharing help embed """
         await ctx.send(embed=NSEmbed)
 
