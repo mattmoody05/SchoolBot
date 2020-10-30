@@ -52,7 +52,6 @@ class TimeTable(commands.Cog):
         eg. Monday 03:03 Maths Class
         """
         async with ctx.channel.typing():
-            await ctx.message.delete()
             day = day.lower()
             valid_time = " ".join(t for t in time.split(":"))
             work = await commands.clean_content().convert(ctx=ctx, argument=text)

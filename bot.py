@@ -65,7 +65,7 @@ async def on_ready():
     print(f'\nLogged in as {client.user}\n')
 
     # other messages
-    print("To stop the bot from running, run ^C")
+    print("To stop the bot from running, run ^C\n")
 
 
 # command to reload cogs if not working properly

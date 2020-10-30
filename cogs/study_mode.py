@@ -53,8 +53,7 @@ class StudyMode(commands.Cog):
                         await message.channel.send(embed=SimpleEmbed("Please go and study!"))
                     if author_id["user_id"] in mentions and message.guild:
                         await message.delete()
-                        await message.channel.send(message.author.metion)
-                        await message.channel.send(embed = SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
+                        await message.channel.send(message.author.mention, embed = SimpleEmbed(f"{self.client.get_user(author_id[0])} is studying please dont disturb him :)"))
 
 
 def setup(client):
