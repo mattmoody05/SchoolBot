@@ -19,6 +19,10 @@ class Math(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    async def cog_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandInvokeError):
+            await ctx.send(f"{ctx.author.mention} an error Occurred!")
+
     @commands.group(invoke_without_command=True)
     async def math(self, ctx):
         TaskErrorEmbed = discord.Embed(
