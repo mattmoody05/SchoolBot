@@ -2,6 +2,7 @@
 import discord
 from discord.colour import Colour
 from discord.ext import commands
+import asyncio
 
 # other imports
 import lavalink
@@ -72,6 +73,7 @@ class Music(commands.Cog):
     async def track_hook(self, event):
         if isinstance(event, lavalink.events.QueueEndEvent):
             guild_id = int(event.player.guild_id)
+            await asyncio.sleep(60)
             await self.connect_to(guild_id, None)
 
     async def connect_to(self, guild_id: int, channel_id: str):
@@ -198,9 +200,8 @@ class Music(commands.Cog):
     async def skip(self, ctx):
         """ Skips the current song """
         player = self.client.lavalink.player_manager.get(ctx.guild.id)
-
+        await ctx.send(embed=SimpleEmbed("Song Skipped"))
         await player.skip()
-        await ctx.send(embed = SimpleEmbed("Song Skipped"))
 
     @music.command()
     async def pause(self, ctx):
@@ -236,7 +237,7 @@ class Music(commands.Cog):
         volume = player.volume
 
         await player.set_volume(vol=vol)
-        await ctx.send(SimpleEmbed(f"Volume changed from {volume} to {vol}"))
+        await ctx.send(embed=SimpleEmbed(f"Volume changed from {volume} to {vol}"))
 
 
 def setup(client):

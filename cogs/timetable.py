@@ -22,7 +22,7 @@ class TimeTable(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        self.check.start()
+        await self.check.start()
 
     @tasks.loop(minutes=1)
     async def check(self):
@@ -88,7 +88,7 @@ class TimeTable(commands.Cog):
                 await ctx.send(embed = SimpleEmbed(f"{ctx.author.name}, please Specify a valid day, eg - Monday"), delete_after=10)
                 return
             if time.count(":") < 1:
-                await ctx.send(embed = SimpleEmbed(f"{ctx.author.name}, please a valid time, eg - 10:10", delete_after=10))
+                await ctx.send(embed = SimpleEmbed(f"{ctx.author.name}, please a valid time, eg - 10:10"), delete_after=10)
                 return
             records = await self.client.db.check_if_in_time_table(day, user_id, valid_time)
             if not records:
@@ -106,7 +106,7 @@ class TimeTable(commands.Cog):
             query = await self.client.db.select_all_from_time_table(user_id)
             if not query:
                 await ctx.message.delete()
-                await ctx.send(embed = SimpleEmbed(f"{ctx.author.name}, you dont have a schedule yet", delete_after=10))
+                await ctx.send(embed = SimpleEmbed(f"{ctx.author.name}, you dont have a schedule yet"), delete_after=10)
                 return
 
             records = []

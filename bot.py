@@ -52,20 +52,20 @@ async def on_connect():
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{BOTPREFIX}help | DM Complains"))
-
-    print("\nLoading cogs...\n")
-
-    # automatically loading all cogs when started
-    for filename in os.listdir("./cogs"):
-        if filename.endswith(".py"):
-            client.load_extension(f'cogs.{filename[:-3]}')
-            print("Loaded cog: {0}".format(filename))
-
+    client.load_extension(f"cogs.music")
     # showing the user that the bot has logged in successfully and with what bot user
     print(f'\nLogged in as {client.user}\n')
-
     # other messages
     print("To stop the bot from running, run ^C\n")
+
+# automatically loading all cogs when started the file
+print("\nLoading cogs...\n")
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py") and not filename.startswith("music"):
+        client.load_extension(f'cogs.{filename[:-3]}')
+        print("Loaded cog: {0}".format(filename))
+
+
 
 
 # command to reload cogs if not working properly

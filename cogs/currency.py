@@ -22,7 +22,7 @@ class Currency(commands.Cog):
 
 
     @currency.command()
-    async def convert(self, ctx, arg1, arg2, arg3):
+    async def convert(self, ctx, arg1: int, arg2: lambda x:str(x).upper(), arg3: lambda x:str(x).upper()):
         """ Converts the currency into other form """
         Converted = str(CurrencyConverter().convert(arg1, arg2, arg3))
 
@@ -39,7 +39,7 @@ class Currency(commands.Cog):
 
 
     @currency.command()
-    async def value(self, ctx, arg1):
+    async def value(self, ctx, arg1: lambda x:str(x).upper()):
         """ Gives the value of currencies """
         Value = str(CurrencyConverter().convert(1, arg1, "USD"))
 
