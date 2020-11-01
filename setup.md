@@ -66,11 +66,9 @@ Note: Python 3.10a, 3.9 and very old versions aren't yet supported by discord.py
 
 ## Installing JDK
 
-#### Use the links below and follow the install process
+#### Use the link below and follow the install process for your platform
 
-- [Windows](https://download.oracle.com/otn-pub/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_windows-x64_bin.exe)
-- [macOS](https://download.oracle.com/otn-pub/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_osx-x64_bin.dmg)
-- [Linux](https://download.oracle.com/otn-pub/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_linux-x64_bin.deb)
+[JDK Download](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html)
 
 
 ## Installing the postgreSQL database
