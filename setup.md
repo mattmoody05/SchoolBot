@@ -90,6 +90,7 @@ Please note, the instructions for this section are designed in a way that they a
 3. Open the 'Bot' tab of your discord application
 4. Click 'Add Bot', then 'Yes, do it!'
 5. If you would like to rename your bot, you are able to do it on this page
+6. Now you have to activate intents for your bot, for that scroll down the page and you'd find **Privileged Gateway Intents**. Under this option switch on the `Presence Intent` and `Server Members Intent`.
 
 #### Getting your bot token
 1. Still on the bot page of your application, underneath the name of your bot, click the 'Copy' button. Now, paste this token somewhere you can find later.
