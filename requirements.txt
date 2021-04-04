@@ -3,7 +3,7 @@ PyDictionary
 Wikipedia-API
 youtube-search
 asyncpg
-aiohttp==3.6.0
+aiohttp==3.7.4
 CurrencyConverter
 pyspellchecker
 lavalink
